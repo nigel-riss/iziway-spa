@@ -6,7 +6,7 @@ module.exports = {
   entry: `./src/index.js`,
   output: {
     filename: `bundle.js`,
-    path: path.resolve(__dirname, `public`)
+    path: path.resolve(__dirname, `public`),
   },
   devServer: {
     contentBase: path.resolve(__dirname, `public`),
@@ -18,10 +18,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: `babel-loader`
-        }
-      }
-    ]
+          loader: `babel-loader`,
+        },
+      },
+    ],
   },
-  devtool: `source-map`
+  devtool: `source-map`,
 };

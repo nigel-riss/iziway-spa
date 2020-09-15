@@ -2,14 +2,14 @@ import React from 'react';
 
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor (props) {
+  //   super(props);
+  // }
 
-  render() {
-    return(
+  render () {
+    return (
       <h1>Hello App</h1>
-    )
+    );
   }
 }
 
