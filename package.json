@@ -1,0 +1,25 @@
+{
+  "name": "iziway-spa",
+  "version": "1.0.0",
+  "description": "Catalog for IZIway franchise",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nigel-riss/iziway-spa.git"
+  },
+  "author": "Yuriy Kurenkov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nigel-riss/iziway-spa/issues"
+  },
+  "homepage": "https://github.com/nigel-riss/iziway-spa#readme",
+  "devDependencies": {
+    "webpack": "4.44.1",
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "3.11.0"
+  }
+}
