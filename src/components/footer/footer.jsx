@@ -1,9 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+import { Colors } from '../../utils/const.js';
 
 
 const Footer = (props) => {
+  const { className } = props;
   return (
-    <footer className="footer">
+    <footer className={className}>
       <div className="footer__logo">
         <div className="logo"><img src="./assets/img/footer-logo.svg" alt="Логотип IZIway"/></div>
       </div>
@@ -15,4 +18,9 @@ const Footer = (props) => {
 };
 
 
-export default Footer;
+const StyledFooter = styled(Footer)`
+  background-color: ${Colors.dark};
+`;
+
+
+export default StyledFooter;
