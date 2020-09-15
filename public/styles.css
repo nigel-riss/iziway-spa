@@ -1,0 +1,168 @@
+/* ***** */
+/* RESET */
+/* ***** */
+
+/* Box sizing rules */
+body {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision;
+  line-height: 1.5;
+}
+
+/* Remove list styles on ul, ol elements with class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* A elements without a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier tor work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ***** */
+/* FONTS */
+/* ***** */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+/* @font-face {
+  font-family: 'PT Serif';
+  src: url('./assets/fonts/PTSerif-Regular.woff2') format('woff2'),
+      url('./assets/fonts/PTSerif-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  src: url('./assets/fonts/PTSerif-Bold.woff2') format('woff2'),
+      url('./assets/fonts/PTSerif-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+} */
+
+
+/* ****** */
+/* GLOBAL */
+/* ****** */
+html {
+  padding: 0;
+  margin: 0;
+
+  font-size: 4.5vw;
+  font-family: 'Roboto', sans-serif;
+
+}
+
+@media (min-width: 1000px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+body {
+  position: relative;
+}
+
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  transform: translate(-50%, -50%);
+
+  display: block;
+  max-width: 25em;
+  margin: 0 auto;
+  background: #fff;
+  fill: none;
+  stroke: #eeeeee;
+  stroke-linecap: round;
+  stroke-width: 8%
+}
+
+.loading use {
+  stroke: #333333;
+  animation: a 2s linear infinite;
+}
+
+@keyframes a { to { stroke-dashoffset: 0px } }
+
+@media (min-width: 1000px) {
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #eeeeee;
+  }
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
