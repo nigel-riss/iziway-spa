@@ -1,4 +1,7 @@
 import React from 'react';
+import Header from '../header/header.jsx';
+import Main from '../main/main.jsx';
+import Footer from '../footer/footer.jsx';
 
 
 class App extends React.Component {
@@ -8,7 +11,11 @@ class App extends React.Component {
 
   render () {
     return (
-      <h1>Hello App</h1>
+      <React.Fragment>
+        <Header></Header>
+        <Main></Main>
+        <Footer></Footer>
+      </React.Fragment>
     );
   }
 }
