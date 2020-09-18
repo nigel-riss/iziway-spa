@@ -1,8 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 
 
 const ItemCard = (props) => {
   const {
+    className,
     item,
     onCardClick,
   } = props;
@@ -20,26 +22,26 @@ const ItemCard = (props) => {
 
   return (
     <article
-      className="item"
+      className={className}
       onClick={() => {
         onCardClick(props.item);
       }}
     >
-      <div className="item__image">
+      <div className="__image">
         <img
           src={mainImageURL}
           alt={name}
         />
       </div>
-      <div className="item__body">
-        <h3 className="item__title">{brand}<br/>{model}</h3>
-        <p className="item__vendor-code">Артикул: {vendor}</p>
-        <div className="item__sizes">
-          <p className="item__size-title">Размеры в наличии</p>
-          <ul className="item__size-list">
+      <div className="__body">
+        <h3 className="__title">{brand}<br/>{model}</h3>
+        <p className="__vendor-code">Артикул: {vendor}</p>
+        <div className="__sizes">
+          <p className="__size-title">Размеры в наличии</p>
+          <ul className="__size-list">
             {sizesArray.map((size, i) => {
               return (
-                <li className="item__size-item" key={`${i}`}>
+                <li className="__size-item" key={`${i}`}>
                   {size}
                 </li>
               );
@@ -50,6 +52,10 @@ const ItemCard = (props) => {
     </article>
   );
 };
+
+
+const StyledItemCard = styled(ItemCard)`
+`;
 
 
 export default ItemCard;
