@@ -1,4 +1,5 @@
 import React from 'react';
+import Search from '../search/search.jsx';
 
 
 class Header extends React.Component {
@@ -14,7 +15,7 @@ class Header extends React.Component {
             <div className="logo"><img src="./assets/img/logo.svg" alt="Логотип IZIway"/></div>
           </div>
           <div className="header__search">
-            {/* <Search/> */}
+            <Search/>
           </div>
         </div>
       </header>
