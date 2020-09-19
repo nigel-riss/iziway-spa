@@ -1,4 +1,8 @@
 import React, {PureComponent} from 'react';
+import styled from 'styled-components';
+import {rgba} from 'polished';
+import {Colors} from '../../utils/const.js';
+import StyledHeader from '../header/header.jsx';
 
 
 const PAGE_PADDING = 2;
@@ -12,7 +16,7 @@ const _getPagesLinks = (currentPage, pagesCount, onPageLinkClick) => {
       pagesLinks.push(
         <a
           key={i}
-          className={`pagination__link ${i === currentPage && `pagination__link--current`}`}
+          className={`__link ${i === currentPage && `__link--current`}`}
           href="#"
           onClick={() => {
             onPageLinkClick(i);
@@ -36,15 +40,16 @@ class Pagination extends PureComponent {
   render() {
     const {
       currentPage,
+      className,
       pagesCount,
       onPageLinkClick,
     } = this.props;
   
     return (
-      <div className="pagination">
+      <div className={className}>
         {(currentPage > 0) &&
         <a
-          className="pagination__prev"
+          className="__prev"
           href="#"
           onClick={() => {
             onPageLinkClick(currentPage - 1)
@@ -53,9 +58,9 @@ class Pagination extends PureComponent {
           Предыдущая страница
         </a>}
 
-        <div className="pagination__pages">
+        <div className="__pages">
           {(currentPage > PAGE_PADDING) &&
-          <span className="pagination__more">
+          <span className="__more">
             &hellip;
           </span>}
 
@@ -64,14 +69,14 @@ class Pagination extends PureComponent {
           }
 
           {(currentPage < pagesCount - PAGE_PADDING - 1) &&
-          <span className="pagination__more">
+          <span className="__more">
             &hellip;
           </span>}
         </div>
 
         {(currentPage < pagesCount - 1) &&
         <a
-          className="pagination__next"
+          className="__next"
           href="#"
           onClick={() => {
             onPageLinkClick(currentPage + 1)
@@ -85,4 +90,52 @@ class Pagination extends PureComponent {
 };
 
 
-export default Pagination;
+const StyledPagination = styled(Pagination)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .__next,
+  .__prev,
+  .__link,
+  .__more {
+    display: inline-block;
+    vertical-align: bottom;
+    margin: 0.5rem 0.25rem;
+    padding: 0.25rem 0.75rem;
+
+    color: ${Colors.dark};
+    text-align: center;
+    text-decoration: none;
+
+    border-radius: 1rem;
+    transition: all 0.25s ease-out;
+
+    &:hover {
+      color: ${Colors.red};
+      background-color: ${rgba(Colors.mist, 0.25)};
+    }
+  }
+
+  .__link--current {
+    color: ${Colors.white};
+    background-color: ${Colors.turquoise};
+  }
+
+  .__more:hover {
+    color: inherit;
+
+    background-color: inherit;
+  }
+
+  .__pages {
+    display: none;
+
+    @media (min-width: 1000px) {
+      display: block;
+    }
+  }
+`;
+
+
+export default StyledPagination;

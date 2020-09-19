@@ -290,7 +290,7 @@
     "no-useless-catch": 2,
     "require-yield": 2,
 
-    "react/prop-types": "never"
+    "react/prop-types": 0
   },
   "extends": [
     "plugin:react/recommended"

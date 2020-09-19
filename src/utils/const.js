@@ -3,4 +3,5 @@ export const Colors = {
   white: `#ffffff`,
   turquoise: `#2dc7c6`,
   mist: `#c3d4dd`,
+  red: `#e64652`,
 };
