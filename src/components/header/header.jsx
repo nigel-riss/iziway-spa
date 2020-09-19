@@ -10,20 +10,21 @@ class Header extends React.Component {
   }
 
   render () {
-    const {className} = this.props;
+    const { className } = this.props;
 
     return (
       <header className={className}>
         <div className="__top">
           <div className="__logo">
-            <div className="logo">
-              <img src="./assets/img/logo.svg" alt="Логотип IZIway"/>
-            </div>
+            <img src="./assets/img/logo.svg" alt="Логотип IZIway"/>
           </div>
           <div className="__search">
             <Search/>
           </div>
         </div>
+        <nav className="__nav">
+
+        </nav>
       </header>
     );
   }
@@ -60,6 +61,10 @@ const StyledHeader = styled(Header)`
     }
   }
 
+  .__logo img {
+    width: 100%;
+  }
+
   .__search {
     position: relative;
     height: 2rem;
@@ -69,9 +74,7 @@ const StyledHeader = styled(Header)`
     }
   }
 
-  .logo img {
-    width: 100%;
-  }
+  .__nav {}
 `;
 
 

@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import {rgba} from 'polished';
-import {Colors} from '../../utils/const.js';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
+import { rgba } from 'polished';
+import { Colors } from '../../utils/const.js';
+import { connect } from 'react-redux';
+import { ActionCreator } from '../../reducer.js';
 import SearchResult from '../search-result/search-result.jsx';
 
 const ESC_KEY_CODE = 27;
@@ -13,7 +13,7 @@ const CHARS_TO_START_SEARCH = 2;
 
 
 class Search extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
@@ -28,7 +28,7 @@ class Search extends Component {
     this._handleEscKeyDown = this._handleEscKeyDown.bind(this);
   }
 
-  render() {
+  render () {
     const {
       className,
       foundItems,
@@ -44,13 +44,13 @@ class Search extends Component {
     return (
       <form
         className={`
-          ${className} ${((value.length >= CHARS_TO_START_SEARCH)
-            && (itemsToShow.length > 0)
-            && `--open`)}
+          ${className} ${((value.length >= CHARS_TO_START_SEARCH) &&
+            (itemsToShow.length > 0) &&
+            `--open`)}
         `}
         onSubmit={this._handleSubmit}
       >
-        {value != `` &&
+        {value !== `` &&
           <div
             className="__wrapper"
             onClick={(evt) => {
@@ -61,8 +61,8 @@ class Search extends Component {
             }}
           ></div>
         }
-        
-        {value != `` &&
+
+        {value !== `` &&
           <button
             className="__clear"
             onClick={(evt) => {
@@ -94,7 +94,7 @@ class Search extends Component {
                   onSearchResultClick(it);
                 }}
               />
-            )
+            );
           })}
           {foundItems.length > 8 &&
             <button
@@ -109,7 +109,7 @@ class Search extends Component {
     );
   }
 
-  _handleChange(evt) {
+  _handleChange (evt) {
     const {
       onSearchInputChange,
     } = this.props;
@@ -121,7 +121,7 @@ class Search extends Component {
     });
   }
 
-  _handleSubmit(evt) {
+  _handleSubmit (evt) {
     const {
       onSearchSubmit,
     } = this.props;
@@ -135,7 +135,7 @@ class Search extends Component {
     });
   }
 
-  _handleEscKeyDown(evt) {
+  _handleEscKeyDown (evt) {
     evt.preventDefault();
 
     this.setState({
@@ -143,7 +143,7 @@ class Search extends Component {
     });
   }
 
-  _handleInputKeys(evt) {
+  _handleInputKeys (evt) {
     switch (evt.keyCode) {
       case ESC_KEY_CODE:
         this._handleEscKeyDown(evt);
@@ -156,11 +156,11 @@ class Search extends Component {
     }
   }
 
-  _handleInputFocus() {
+  _handleInputFocus () {
     document.addEventListener(`keydown`, this._handleInputKeys);
   }
 
-  _handleInputBlur() {
+  _handleInputBlur () {
     document.removeEventListener(`keydown`, this._handleInputKeys);
   }
 }
@@ -171,16 +171,16 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSearchInputChange(query) {
+  onSearchInputChange (query) {
     dispatch(ActionCreator.findItems(query));
   },
 
-  onSearchSubmit() {
+  onSearchSubmit () {
     dispatch(ActionCreator.clearFilters());
     dispatch(ActionCreator.applyFoundItems());
   },
 
-  onSearchResultClick(item) {
+  onSearchResultClick (item) {
     dispatch(ActionCreator.setActiveItem(item));
   },
 });

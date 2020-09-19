@@ -1,6 +1,6 @@
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { ActionCreator } from '../../reducer.js';
 import ItemCard from '../item/item.jsx';
 import Pagination from '../pagination/pagination.jsx';
 
@@ -9,11 +9,11 @@ const ITEMS_PER_PAGE = 16;
 
 
 class Catalog extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props);
   }
 
-  render() {
+  render () {
     const {
       currentPage,
       filteredItems,
@@ -34,7 +34,7 @@ class Catalog extends PureComponent {
                 item={item}
                 onCardClick={onCardClick}
               />
-            )
+            );
           })}
         </div>
         <div className="catalog__pagination">
@@ -47,7 +47,7 @@ class Catalog extends PureComponent {
       </div>
     );
   }
-};
+}
 
 
 const mapStateToProps = (state) => ({
@@ -56,15 +56,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCardClick(item) {
+  onCardClick (item) {
     dispatch(ActionCreator.setActiveItem(item));
   },
 
-  onPageLinkClick(pageNumber) {
+  onPageLinkClick (pageNumber) {
     dispatch(ActionCreator.setCurrentPage(pageNumber));
   },
 });
 
 
-export {Catalog};
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog);

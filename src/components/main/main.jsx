@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import Buttons from '../buttons/buttons.jsx';
 import Filters from '../filters/filters.jsx';
 import Catalog from '../catalog/catalog.jsx';
 
 
-class Main extends Component {
-  constructor(props) {
+class Main extends PureComponent {
+  constructor (props) {
     super(props);
   }
 
-  render() {
+  render () {
     const {
       className,
       items,
@@ -37,7 +37,7 @@ class Main extends Component {
       </main>
     );
   }
-};
+}
 
 
 const StyledMain = styled(Main)`

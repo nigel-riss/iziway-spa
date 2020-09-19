@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {rgba} from 'polished';
-import {Colors} from '../../utils/const.js';
+import { rgba } from 'polished';
+import { Colors } from '../../utils/const.js';
 
 
 const ItemCard = (props) => {

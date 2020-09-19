@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Colors} from '../../utils/const.js';
+import { Colors } from '../../utils/const.js';
 
 
 const SearchResult = (props) => {
@@ -24,7 +24,7 @@ const SearchResult = (props) => {
       </div>
       <h3 className="__title">{title}</h3>
     </article>
-  )
+  );
 };
 
 

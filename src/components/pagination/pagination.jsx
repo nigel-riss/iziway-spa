@@ -1,8 +1,7 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import {rgba} from 'polished';
-import {Colors} from '../../utils/const.js';
-import StyledHeader from '../header/header.jsx';
+import { rgba } from 'polished';
+import { Colors } from '../../utils/const.js';
 
 
 const PAGE_PADDING = 2;
@@ -29,22 +28,22 @@ const _getPagesLinks = (currentPage, pagesCount, onPageLinkClick) => {
   }
 
   return pagesLinks;
-}
+};
 
 
 class Pagination extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props);
   }
 
-  render() {
+  render () {
     const {
       currentPage,
       className,
       pagesCount,
       onPageLinkClick,
     } = this.props;
-  
+
     return (
       <div className={className}>
         {(currentPage > 0) &&
@@ -52,7 +51,7 @@ class Pagination extends PureComponent {
           className="__prev"
           href="#"
           onClick={() => {
-            onPageLinkClick(currentPage - 1)
+            onPageLinkClick(currentPage - 1);
           }}
         >
           Предыдущая страница
@@ -79,7 +78,7 @@ class Pagination extends PureComponent {
           className="__next"
           href="#"
           onClick={() => {
-            onPageLinkClick(currentPage + 1)
+            onPageLinkClick(currentPage + 1);
           }}
         >
           Следующая страница
@@ -87,7 +86,7 @@ class Pagination extends PureComponent {
       </div>
     );
   }
-};
+}
 
 
 const StyledPagination = styled(Pagination)`
