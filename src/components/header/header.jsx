@@ -23,7 +23,11 @@ class Header extends React.Component {
           </div>
         </div>
         <nav className="__nav">
-
+          <ul className="__nav-list">
+            <li className="__nav-item"><a href="#">Кроссовки</a></li>
+            <li className="__nav-item"><a href="#">Одежда</a></li>
+            <li className="__nav-item"><a href="#">Аксессуары</a></li>
+          </ul>
         </nav>
       </header>
     );
@@ -68,6 +72,7 @@ const StyledHeader = styled(Header)`
   .__search {
     position: relative;
     height: 2rem;
+    margin-bottom: 2rem;
 
     @media (min-width: 1000px) {
       flex-basis: 500px;
@@ -75,6 +80,25 @@ const StyledHeader = styled(Header)`
   }
 
   .__nav {}
+
+  .__nav-list {}
+
+  .__nav-item {
+    margin: 1rem 0;
+
+    font-size: 1.125rem;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  .__nav-item a {
+    color: ${Colors.dark};
+    text-decoration: none;
+
+    &:hover {
+      color: ${Colors.turquoise};
+    }
+  }
 `;
 
 

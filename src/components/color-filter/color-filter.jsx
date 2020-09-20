@@ -10,7 +10,7 @@ const ColorFilter = (props) => {
     color,
     category,
     isChecked,
-    onCheckboxClick
+    onCheckboxClick,
   } = props;
 
   return (
@@ -28,7 +28,9 @@ const ColorFilter = (props) => {
       <label
         className="color__label"
         htmlFor={`color-${color}`}
-        style={{backgroundImage: `${getGradientFromArray(ColorNameToHexMap[color])}`}}
+        style={{
+          backgroundImage: `${getGradientFromArray(ColorNameToHexMap[color])}`,
+        }}
       ></label>
     </div>
   );

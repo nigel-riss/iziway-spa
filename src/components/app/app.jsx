@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
+import { connect } from 'react-redux';
+import { ActionCreator } from '../../reducer.js';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
 import Footer from '../footer/footer.jsx';
@@ -9,12 +9,13 @@ import ItemPopup from '../item-popup/item-popup.jsx';
 
 
 class App extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
   }
 
-  render() {
+  render () {
     const {
+      className,
       items,
       activeItem,
       isFiltersPaneShown,
@@ -26,18 +27,18 @@ class App extends React.Component {
       : document.body.classList.remove(`overflow-hidden`);
 
     return (
-      <React.Fragment>
+      <div className={className}>
         <Header/>
         <Main
           items={items}
         />
         <Footer/>
 
-      {activeItem && <ItemPopup
-        item={activeItem}
-        onPopupCloseClick={onPopupCloseClick}
-      />}
-      </React.Fragment>
+        {activeItem && <ItemPopup
+          item={activeItem}
+          onPopupCloseClick={onPopupCloseClick}
+        />}
+      </div>
     );
   }
 }
@@ -50,7 +51,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onPopupCloseClick() {
+  onPopupCloseClick () {
     dispatch(ActionCreator.clearActiveItem());
   },
 });
@@ -58,6 +59,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 const StyledApp = styled(App)`
   background-image: url('./assets/img/app-bg.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
 `;
 
 

@@ -107,12 +107,12 @@ const StyledPagination = styled(Pagination)`
     text-align: center;
     text-decoration: none;
 
+    border: 1px solid ${rgba(Colors.mist, 0.5)};
     border-radius: 1rem;
     transition: all 0.25s ease-out;
 
     &:hover {
-      color: ${Colors.red};
-      background-color: ${rgba(Colors.mist, 0.25)};
+      background-color: ${rgba(Colors.mist, 0.5)};
     }
   }
 
@@ -121,9 +121,12 @@ const StyledPagination = styled(Pagination)`
     background-color: ${Colors.turquoise};
   }
 
+  .__more {
+    border: none;
+  }
+
   .__more:hover {
     color: inherit;
-
     background-color: inherit;
   }
 

@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { PureComponent } from 'react';
 
 
-class FilterSet extends Component {
-  constructor(props) {
+class FilterSet extends PureComponent {
+  constructor (props) {
     super(props);
 
     this.state = {
@@ -10,7 +10,7 @@ class FilterSet extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     if (window.innerWidth < 1000) {
       this.setState({
         isOpen: false,
@@ -18,7 +18,7 @@ class FilterSet extends Component {
     }
   }
 
-  render() {
+  render () {
     const {
       title,
       children,

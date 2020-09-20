@@ -63,6 +63,8 @@ const StyledItemCard = styled(ItemCard)`
 
   border: 1px solid ${rgba(Colors.dark, 0.25)};
 
+  background-color: ${Colors.white};
+
   @media (min-width: 1000px) {
     flex-direction: column;
     max-width: 220px;

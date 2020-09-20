@@ -254,7 +254,6 @@ const StyledSearch = styled(Search)`
 
     &:active,
     &:focus {
-      outline: none;
       opacity: 0.5;
     }
   }
@@ -276,6 +275,7 @@ const StyledSearch = styled(Search)`
     background-position: center left 2rem;
 
     &:focus {
+      border: 1px solid ${rgba(Colors.turquoise, 0.75)};
       outline: none;
     }
   }
