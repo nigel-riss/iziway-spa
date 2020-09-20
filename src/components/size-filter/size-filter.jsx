@@ -1,36 +1,97 @@
 import React from 'react';
+import styled from 'styled-components';
+import { rgba } from 'polished';
+import { Colors } from '../../utils/const.js';
 
-
-const SimpleFilter = (props) => {
+const SizeFilter = (props) => {
   const {
-    name,
+    className,
+    size,
     category,
     isChecked,
-    onRadioClick
+    onCheckboxClick,
   } = props;
 
   return (
-    <div className="filter__set">
+    <div className={className}>
       <input
-        className="filter__checkbox"
+        className="size__checkbox"
         type="checkbox"
-        id={name}
         name={category}
+        id={`size-${size}`}
         checked={isChecked}
         onChange={() => {
-          onRadioClick(category, name);
+          onCheckboxClick(category, size);
         }}
       />
       <label
-        className="filter__label"
-        htmlFor={name}
+        className="size__label"
+        htmlFor={`size-${size}`}
       >
-        {name}
-        {/* {`${name} (${count})`} */}
+        {size}
       </label>
     </div>
   );
 };
 
 
-export default SimpleFilter;
+const StyledSizeFilter = styled(SizeFilter)`
+  position: relative;
+
+  margin-right: 0.45rem;
+  margin-bottom: 0.45rem;
+
+  font-size: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+
+  @media (min-width: 1000px) {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .size__checkbox {
+    position: absolute;
+
+    height: 0;
+    width: 0;
+
+    font-size: 0;
+
+    opacity: 0;
+  }
+
+  .size__label {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1rem;
+    text-align: center;
+
+    border-radius: 50%;
+    background-color: ${rgba(Colors.mist, 0.5)};
+    cursor: pointer;
+
+    @media (min-width: 1000px) {
+      font-size: 0.925rem;
+    }
+  }
+
+  .size__checkbox:hover + .size__label {
+    @media (min-width: 1000px) {
+      color: $white;
+      background-color: ${Colors.mist};
+    }
+  }
+
+  .size__checkbox:checked + .size__label {
+    color: ${Colors.white};
+    background-color: ${Colors.turquoise};
+  }
+`;
+
+
+export default StyledSizeFilter;

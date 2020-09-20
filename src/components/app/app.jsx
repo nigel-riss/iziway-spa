@@ -61,6 +61,10 @@ const StyledApp = styled(App)`
   background-image: url('./assets/img/app-bg.svg');
   background-repeat: no-repeat;
   background-size: contain;
+
+  @media (min-width: 1000px) {
+    background-size: inherit;
+  }
 `;
 
 

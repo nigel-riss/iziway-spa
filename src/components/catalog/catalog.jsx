@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { ActionCreator } from '../../reducer.js';
 import ItemCard from '../item/item.jsx';
@@ -15,6 +16,7 @@ class Catalog extends PureComponent {
 
   render () {
     const {
+      className,
       currentPage,
       filteredItems,
       onCardClick,
@@ -25,7 +27,7 @@ class Catalog extends PureComponent {
       .slice(currentPage * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE + ITEMS_PER_PAGE);
 
     return (
-      <div className="catalog">
+      <div className={className}>
         <div className="catalog__items">
           {itemsToShow.map((item, i) => {
             return (
@@ -66,4 +68,16 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Catalog);
+const StyledCatalog = styled(Catalog)`
+  .catalog__items {
+    @media (min-width: 1000px) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-bottom: 20px;
+    }
+  }
+`;
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(StyledCatalog);

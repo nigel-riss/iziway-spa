@@ -70,6 +70,10 @@ const StyledItemCard = styled(ItemCard)`
     max-width: 220px;
     flex-basis: 220px;
     margin-right: 15px;
+
+    background-color: ${rgba(Colors.white, 0.5)};
+    backdrop-filter: blur(5px);
+    border: 1px solid ${rgba(Colors.mist, 0.5)};
   }
 
   &:hover {

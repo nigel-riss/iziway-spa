@@ -79,7 +79,7 @@ const FILTERS_CONFIG = {
     values: [],
   },
   sizes: {
-    name: `Размер обуви`,
+    name: `Размер`,
     type: FilterType.SIZE,
     categoryKey: `sizes`,
     values: [],

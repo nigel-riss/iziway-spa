@@ -176,14 +176,14 @@ const StyledFilters = styled(Filters)`
   position: fixed;
   top: 0;
   bottom: 0;
-  /* left: -110%; */
-  left: 0;
+  left: -110%;
   z-index: 11;
 
   padding: 2rem;
   width: 100%;
 
   background-color: ${Colors.white};
+  backdrop-filter: blur(5px);
   overflow-y: scroll;
   transition: all 0.25s ease-out;
 
@@ -195,6 +195,9 @@ const StyledFilters = styled(Filters)`
     padding: 2rem 1rem;
 
     overflow: auto;
+
+    background-color: ${rgba(Colors.white, 0.5)};
+    backdrop-filter: blur(5px);
   }
 
   &.--shown {
@@ -345,7 +348,6 @@ const StyledFilters = styled(Filters)`
       display: none;
     }
   }
-
 `;
 
 
