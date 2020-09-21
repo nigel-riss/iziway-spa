@@ -29,21 +29,21 @@ const ItemCard = (props) => {
         onCardClick(props.item);
       }}
     >
-      <div className="__image">
+      <div className="item__image">
         <img
           src={mainImageURL}
           alt={name}
         />
       </div>
-      <div className="__body">
-        <h3 className="__title">{brand}<br/>{model}</h3>
-        <p className="__vendor-code">Артикул: {vendor}</p>
-        <div className="__sizes">
-          <p className="__size-title">Размеры в наличии</p>
-          <ul className="__size-list">
+      <div className="item__body">
+        <h3 className="item__title">{brand}<br/>{model}</h3>
+        <p className="item__vendor-code">Артикул: {vendor}</p>
+        <div className="item__sizes">
+          <p className="item__size-title">Размеры в наличии</p>
+          <ul className="item__size-list">
             {sizesArray.map((size, i) => {
               return (
-                <li className="__size-item" key={`${i}`}>
+                <li className="item__size-item" key={`${i}`}>
                   {size}
                 </li>
               );
@@ -60,9 +60,7 @@ const StyledItemCard = styled(ItemCard)`
   margin-bottom: 1rem;
   display: flex;
   flex-direction: row;
-
   border: 1px solid ${rgba(Colors.dark, 0.25)};
-
   background-color: ${Colors.white};
 
   @media (min-width: 1000px) {
@@ -70,9 +68,8 @@ const StyledItemCard = styled(ItemCard)`
     max-width: 220px;
     flex-basis: 220px;
     margin-right: 15px;
-
     background-color: ${rgba(Colors.white, 0.5)};
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
     border: 1px solid ${rgba(Colors.mist, 0.5)};
   }
 
@@ -85,38 +82,32 @@ const StyledItemCard = styled(ItemCard)`
     border-color: ${Colors.turquoise};
   }
 
-  .__image {
+  .item__image {
     position: relative;
-
     flex-basis: 40%;
-
     border-right: 1px solid ${rgba(Colors.dark, 0.125)};
-
     overflow: hidden;
-    
+
     @media (min-width: 1000px) {
       padding-top: 80%;
-
       border-bottom: 1px solid ${rgba(Colors.dark, 0.125)};
     }
   }
 
-  .__image img {
+  .item__image img {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     top: 0;
-
     object-fit: cover;
     width: 100%;
     height: 100%;
   }
 
-  .__body {
+  .item__body {
     flex-basis: 60%;
     padding: 1rem;
-
     text-align: center;
 
     @media (min-width: 1000px) {
@@ -127,9 +118,8 @@ const StyledItemCard = styled(ItemCard)`
     }
   }
 
-  .__title {
+  .item__title {
     margin-bottom: 0.5rem;
-
     font-size: 1rem;
     line-height: 1.5;
 
@@ -138,11 +128,11 @@ const StyledItemCard = styled(ItemCard)`
     }
   }
 
-  .__vendor-code {
+  .item__vendor-code {
     display: none;
   }
 
-  .__size-title {
+  .item__size-title {
     font-size: 0.75rem;
     line-height: 1.5;
 
@@ -152,24 +142,21 @@ const StyledItemCard = styled(ItemCard)`
     }
   }
 
-  .__size-list {
+  .item__size-list {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
   }
 
-  .__size-item {
+  .item__size-item {
     margin: 0 0.25rem;
-
     font-size: 0.635rem;
     
     @media (min-width: 1000px) {
       padding: 0.25rem;
       margin: 0.125rem 0.25rem;
-      
       font-size: 0.75rem;
       text-align: center;
-      
       border-radius: 50%;
       background-color: ${rgba(Colors.mist, 0.25)};
     }

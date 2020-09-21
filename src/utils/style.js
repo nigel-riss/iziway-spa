@@ -1,4 +1,5 @@
 export const getGradientFromArray = (colors) => {
+  console.log(colors);
   const gradient = colors.reduce((acc, curr, i, arr) => {
     const percentDelta = ~~(100 / arr.length);
     return `${acc}, ${curr} ${i * percentDelta}%, ${curr} ${(i + 1) * percentDelta}%`;

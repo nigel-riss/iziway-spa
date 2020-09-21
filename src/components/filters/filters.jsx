@@ -28,10 +28,10 @@ class Filters extends PureComponent {
     } = this.props;
 
     return (
-      <form className={`${className} ${isFiltersPaneShown && `--shown`}`}>
-        <h2 className="__title">Фильтры</h2>
+      <form className={`${className} ${isFiltersPaneShown && `filters--shown`}`}>
+        <h2 className="filters__title">Фильтры</h2>
         <button
-          className="__close"
+          className="filters__close"
           onClick={(evt) => {
             evt.preventDefault();
             onCloseButtonClick();
@@ -52,7 +52,7 @@ class Filters extends PureComponent {
         })}
 
         <input
-          className="__reset"
+          className="filters__reset"
           type="reset"
           value="Сбросить"
           onClick={(evt) => {
@@ -62,7 +62,7 @@ class Filters extends PureComponent {
         />
 
         <input
-          className="__apply"
+          className="filters__apply"
           type="button"
           value="Применить"
           onClick={(evt) => {
@@ -108,7 +108,8 @@ class Filters extends PureComponent {
               return (
                 <ColorFilter
                   key={`${i}=${value}`}
-                  color={value}
+                  color={value || `Белый`}
+                  // TODO: Fix color filters issue
                   category={config.categoryKey}
                   isChecked={config.values[value].isChecked}
                   onCheckboxClick={onRadioClick}
@@ -178,10 +179,8 @@ const StyledFilters = styled(Filters)`
   bottom: 0;
   left: -110%;
   z-index: 11;
-
   padding: 2rem;
   width: 100%;
-
   background-color: ${Colors.white};
   backdrop-filter: blur(5px);
   overflow-y: scroll;
@@ -191,47 +190,37 @@ const StyledFilters = styled(Filters)`
     position: relative;
     left: 0;
     z-index: 9;
-
     padding: 2rem 1rem;
-
     overflow: auto;
-
     background-color: ${rgba(Colors.white, 0.5)};
     backdrop-filter: blur(5px);
   }
 
-  &.--shown {
+  &.filters--shown {
     left: 0;
   }
 
-  .__title {
+  .filters__title {
     display: inline-block;
     margin-bottom: 3rem;
-
     font-size: 1.25rem;
-
     border-bottom: 1px solid ${Colors.turquoise};
 
     @media (min-width: 1000px) {
       margin-left: 0;
-
       font-size: 1.5rem;
     }
   }
 
-  .__close {
+  .filters__close {
     position: absolute;
     right: 1rem;
     top: 1.5rem;
-
     height: 3rem;
     width: 3rem;
-
     font-size: 0;
-
     border: none;
     border-radius: 50%;
-
     background-color: ${rgba(Colors.mist, 0.5)};
     transition: all 0.25s ease-in-out;
 
@@ -241,7 +230,6 @@ const StyledFilters = styled(Filters)`
 
     &:hover {
       transform: rotate(180deg);
-
       cursor: pointer;
       background-color: ${Colors.turquoise};
 
@@ -264,46 +252,37 @@ const StyledFilters = styled(Filters)`
 
     &::before {
       content: '';
-
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -0.5px) rotate(45deg);
       transform-origin: center;
-
       height: 1px;
       width: 1.5rem;
-
       background-color: ${Colors.dark};
     }
 
     &::after {
       content: '';
-
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -0.5px) rotate(135deg);
       transform-origin: center;
-
       height: 1px;
       width: 1.5rem;
-
       background-color: ${Colors.dark};
     }
   }
 
-  .__reset {
+  .filters__reset {
     display: block;
     margin-top: 1.5rem;
     padding: 0.5rem 1.5rem;
     width: 100%;
-
     color: ${Colors.turquoise};
     font-size: 1.125rem;
-
     border: 2px solid transparent;
-
     background-color: ${Colors.dark};
     border-radius: 2rem;
     cursor: pointer;
@@ -319,17 +298,14 @@ const StyledFilters = styled(Filters)`
     }
   }
 
-  .__apply {
+  .filters__apply {
     display: block;
     margin-top: 1rem;
     padding: 0.5rem 1.5rem;
     width: 100%;
-
     color: ${Colors.dark};
     font-size: 1.125rem;
-
     border: 2px solid ${Colors.dark};
-
     background-color: ${Colors.white};
     border-radius: 2rem;
 

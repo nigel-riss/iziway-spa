@@ -21,14 +21,14 @@ class Main extends PureComponent {
         {/* <div className="__title">
           <h1 className="category-title">Мужские кроссовки</h1>
         </div> */}
-        <div className="__body">
-          <div className="__buttons">
+        <div className="main__body">
+          <div className="main__buttons">
             <Buttons/>
           </div>
-          <div className="__filters">
+          <div className="main__filters">
             <Filters/>
           </div>
-          <div className="__catalog">
+          <div className="main__catalog">
             <Catalog
               items={items}
             />
@@ -51,9 +51,9 @@ const StyledMain = styled(Main)`
     padding-bottom: 80px;
   }
 
-  .__title {}
+  .main__title {}
 
-  .__buttons {
+  .main__buttons {
     margin-bottom: 1rem;
 
     @media (min-width: 1000px) {
@@ -61,21 +61,21 @@ const StyledMain = styled(Main)`
     }
   }
 
-  .__body {
+  .main__body {
     @media (min-width: 1000px) {
       display: flex;
       justify-content: space-between;
     }
   }
 
-  .__filters {
+  .main__filters {
     @media (min-width: 1000px) {
       padding-right: 20px;
       flex-basis: 280px;
     }
   }
 
-  .__catalog {
+  .main__catalog {
     @media (min-width: 1000px) {
       flex-basis: 940px;
     }

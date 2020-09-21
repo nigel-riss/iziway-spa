@@ -17,6 +17,8 @@ const ColorFilter = (props) => {
     onCheckboxClick,
   } = props;
 
+  const colorHexArray = ColorNameToHexMap[color] || [`#ffffff`];
+
   return (
     <div className={className}>
       <input
@@ -33,7 +35,7 @@ const ColorFilter = (props) => {
         className="color__label"
         htmlFor={`color-${color}`}
         style={{
-          backgroundImage: `${getGradientFromArray(ColorNameToHexMap[color])}`,
+          backgroundImage: `${getGradientFromArray(colorHexArray)}`,
         }}
       ></label>
     </div>
@@ -54,10 +56,8 @@ const StyledColorFilter = styled(ColorFilter)`
 
   .color__checkbox {
     position: absolute;
-
     height: 1rem;
     width: 1rem;
-
     opacity: 0;
   }
 
@@ -65,7 +65,6 @@ const StyledColorFilter = styled(ColorFilter)`
     display: inline-block;
     height: 2rem;
     width: 2rem;
-
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0 0 5px ${rgba(Colors.mist, 1)};
@@ -83,14 +82,11 @@ const StyledColorFilter = styled(ColorFilter)`
   .color__checkbox:checked + .color__label {
     &::before {
       content: '';
-
       position: absolute;
       top: -0.25rem;
       left: -0.25rem;
-
       height: 2.5rem;
       width: 2.5rem;
-
       border: 0.25rem solid ${Colors.turquoise};
       border-radius: 50%;
 

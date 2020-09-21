@@ -1,0 +1,61 @@
+html {
+  // typography
+  color: $dark;
+  font-family: $mainFont;
+  font-size: 4.5vw;
+
+  // visual
+  scroll-behavior: smooth;
+
+  @include atDesktopS {
+    // typography
+    font-size: 14px;
+  }
+}
+
+body {
+  // positioning
+  position: relative;
+}
+
+.loading {
+  // positioning
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  transform: translate(-50%, -50%);
+
+  display: block;
+  max-width: 25em;
+  margin: 0 auto;
+  background: #fff;
+  fill: none;
+  stroke: $grey;
+  stroke-linecap: round;
+  stroke-width: 8%
+}
+
+.loading use {
+  stroke: $dark;
+  animation: a 2s linear infinite;
+}
+
+@keyframes a { to { stroke-dashoffset: 0px } }
+
+@include atDesktopS {
+  ::-webkit-scrollbar {
+    // box model
+    width: 0.5rem;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    // visual
+    background-color: $grey;
+  }
+}
+
+.overflow-hidden {
+  // visual
+  overflow: hidden;
+}

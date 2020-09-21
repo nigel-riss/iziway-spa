@@ -46,13 +46,13 @@ class Search extends Component {
         className={`
           ${className} ${((value.length >= CHARS_TO_START_SEARCH) &&
             (itemsToShow.length > 0) &&
-            `--open`)}
+            `search--open`)}
         `}
         onSubmit={this._handleSubmit}
       >
         {value !== `` &&
           <div
-            className="__wrapper"
+            className="search__wrapper"
             onClick={(evt) => {
               evt.preventDefault();
               this.setState({
@@ -64,7 +64,7 @@ class Search extends Component {
 
         {value !== `` &&
           <button
-            className="__clear"
+            className="search__clear"
             onClick={(evt) => {
               evt.preventDefault();
               this.setState({
@@ -75,7 +75,7 @@ class Search extends Component {
         }
 
         <input
-          className="__input"
+          className="search__input"
           type="text"
           placeholder="Я ищу ..."
           onChange={this._handleChange}
@@ -83,7 +83,7 @@ class Search extends Component {
           onBlur={this._handleInputBlur}
           value={value}
         />
-        <div className="__results">
+        <div className="search__results">
           {itemsToShow.map((it, i) => {
             return (
               <SearchResult
@@ -98,7 +98,7 @@ class Search extends Component {
           })}
           {foundItems.length > 8 &&
             <button
-              className="__more"
+              className="search__more"
               onClick={this._handleSubmit}
             >
               Показать ещё
@@ -191,56 +191,50 @@ const StyledSearch = styled(Search)`
   z-index: 9;
   left: 0;
   right: 0;
-
   margin-bottom: 1rem;
   border-radius: 1.25rem;
 
   @media (min-width: 1000px) {
     z-index: 11;
-
     margin-bottom: 0;
     margin-right: 1rem;
   }
 
-  &.--open {
+  &.search--open {
     box-shadow: 0 0 0.5rem ${rgba(Colors.dark, 0.25)};
 
-    .__input {
+    .search__input {
       border-color: ${rgba(Colors.dark, 0.25)};
     }
 
-    .__results {
+    .search__results {
       display: block;
     }
   }
 
-  .__wrapper {
+  .search__wrapper {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-
     background-color: ${rgba(Colors.dark, 0.125)};
     backdrop-filter: blur(2px);
   }
 
-  .__clear {
+  .search__clear {
     position: absolute;
     z-index: 3;
     right: 0.125rem;
     top: 0.125rem;
-
     display: flex;
     justify-content: center;
     align-items: center;
     height: 2rem;
     width: 2rem;
     padding: 0.5rem 0.25rem;
-
     border: none;
     border-radius: 50%;
-
     background-color: ${Colors.turquoise};
     background-image: url('./assets/img/x.svg');
     background-position: center center;
@@ -258,17 +252,14 @@ const StyledSearch = styled(Search)`
     }
   }
 
-  .__input {
+  .search__input {
     position: relative;
     z-index: 2;
-
     padding: 0.325rem 1.25rem;
     padding-left: 6rem;
     width: 100%;
-
     border: 1px solid ${rgba(Colors.dark, 0.5)};
     border-radius: 1.25rem;
-
     background-image: url('./assets/img/search.svg');
     background-repeat: no-repeat;
     background-size: 1.5rem;
@@ -280,35 +271,29 @@ const StyledSearch = styled(Search)`
     }
   }
 
-  .__results {
+  .search__results {
     position: relative;
     z-index: 1;
     top: -1rem;
-
     display: none;
     padding-top: 2rem;
     width: 100%;
-
     background-color: ${Colors.white};
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     overflow: hidden;
   }
 
-  .__more {
+  .search__more {
     position: relative;
-
     display: block;
     width: 100%;
     margin-top: 0.5rem;
     padding-top: 0.5rem;
     padding-bottom: 2rem;
-
     font-size: 1rem;
     font-weight: 700;
-
     border: none;
-
     background-color: ${rgba(Colors.mist, 0.25)};
     cursor: pointer;
 
@@ -331,29 +316,23 @@ const StyledSearch = styled(Search)`
 
     &::after {
       content: '';
-
       position: absolute;
       top: 2.125rem;
       left: 50%;
       transform: translateX(-50%);
-
       height: 1px;
       width: 12rem;
-
       background-color: ${rgba(Colors.turquoise, 0.5)};
     }
 
     &::before {
       content: '';
-
       position: absolute;
       top: 2.25rem;
       left: 50%;
       transform: translateX(-50%) rotate(180deg);
-
       height: 1.5rem;
       width: 1.5rem;
-
       background-image: url('./assets/img/back.svg');
       background-repeat: no-repeat;
       background-position: center center;

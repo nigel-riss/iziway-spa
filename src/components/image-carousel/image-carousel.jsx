@@ -1,11 +1,14 @@
-import React, {Component} from 'react';
+import React, { PureComponent } from 'react';
+import styled from 'styled-components';
+import { rgba } from 'polished';
+import { Colors } from '../../utils/const.js';
 
 
-class ImageCarousel extends Component {
-  constructor(props) {
+class ImageCarousel extends PureComponent {
+  constructor (props) {
     super(props);
 
-    const {images} = this.props;
+    const { images } = this.props;
 
     this.state = {
       activeImage: images[0] || null,
@@ -14,8 +17,9 @@ class ImageCarousel extends Component {
     this._handleThumbClick = this._handleThumbClick.bind(this);
   }
 
-  render() {
-    let {
+  render () {
+    const {
+      className,
       images,
     } = this.props;
 
@@ -23,15 +27,13 @@ class ImageCarousel extends Component {
       activeImage,
     } = this.state;
 
-    images = images.slice(0, 4);
-
     return (
-      <div className="image-carousel">
+      <div className={className}>
         <div className="image-carousel__main">
           <img src={activeImage} alt=""/>
         </div>
         <div className="image-carousel__thumbnails">
-          {images.map((image, i) => {
+          {images.slice(0, 4).map((image, i) => {
             return (
               <div
                 className="image-carousel__thumb"
@@ -46,10 +48,10 @@ class ImageCarousel extends Component {
           })}
         </div>
       </div>
-    )
+    );
   }
 
-  _handleThumbClick(image) {
+  _handleThumbClick (image) {
     this.setState({
       activeImage: image,
     });
@@ -57,4 +59,41 @@ class ImageCarousel extends Component {
 }
 
 
-export default ImageCarousel;
+const StyledImageCarousel = styled(ImageCarousel)`
+  .image-carousel__main {
+    // box model
+    margin-bottom: 10px;
+  }
+
+  .image-carousel__main img {
+    width: 100%;
+  }
+
+  .image-carousel__thumbnails {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .image-carousel__thumb {
+    flex-basis: calc(25% - 8px);
+    border: 1px solid ${rgba(Colors.mist, 0.25)};
+
+    &:hover {
+      border: 1px solid ${rgba(Colors.dark, 0.5)};
+      cursor: pointer;
+    }
+
+    &:active {
+      border: 1px solid ${Colors.turquoise};
+    }
+  }
+
+  .image-carousel__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+
+export default StyledImageCarousel;

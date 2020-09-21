@@ -9,13 +9,13 @@ import {
 
 const sneakers = data.filter((it) => {
   const category = it.name.split(` `)[0];
-  return category === `Кроссовки`;
+  return category !== `Кроссовки`;
 });
 
 
-///////////////
+// ////////////
 // Filtering //
-///////////////
+// ////////////
 
 const getFilteredItems = (items, filtersConfig) => {
   let itemsToFilter = items.slice();
@@ -61,7 +61,7 @@ const filterItems = (items, category, type, filteringValues) => {
   });
 
   return items;
-}
+};
 
 
 const FilterType = {
@@ -122,12 +122,12 @@ const FILTERS_CONFIG = {
 for (const key in FILTERS_CONFIG) {
   const config = FILTERS_CONFIG[key];
 
-  switch(config.type) {
+  switch (config.type) {
     case FilterType.SIMPLE:
     case FilterType.COLOR:
       config.values = getValuesCount(sneakers, config.categoryKey);
       for (const key in config.values) {
-        config.values[key][`isChecked`] = false;
+        config.values[key].isChecked = false;
       }
       break;
     case FilterType.SIZE:
@@ -142,33 +142,33 @@ for (const key in FILTERS_CONFIG) {
     case FilterType.MIN_MAX:
       break;
   }
-};
+}
 
 
-const _toggleFilter = (state, {category, value}) => {
+const _toggleFilter = (state, { category, value }) => {
   const filtersConfigCopy = JSON.parse(JSON.stringify(state.filtersConfig));
-  filtersConfigCopy[category][`values`][value][`isChecked`] = !state.filtersConfig[category][`values`][value][`isChecked`];
+  filtersConfigCopy[category].values[value].isChecked = !state.filtersConfig[category].values[value].isChecked;
   return filtersConfigCopy;
 };
 
-const _switchFilter = (state, {category, value}) => {
+const _switchFilter = (state, { category, value }) => {
   const filtersConfigCopy = JSON.parse(JSON.stringify(state.filtersConfig));
-  Object.keys(filtersConfigCopy[category][`values`])
+  Object.keys(filtersConfigCopy[category].values)
     .forEach(key => {
-      filtersConfigCopy[category][`values`][key][`isChecked`] = false;
+      filtersConfigCopy[category].values[key].isChecked = false;
     });
   // filtersConfigCopy[category][`values`][value][`isChecked`] = true;
-  filtersConfigCopy[category][`values`][value][`isChecked`] = !state.filtersConfig[category][`values`][value][`isChecked`];
+  filtersConfigCopy[category].values[value].isChecked = !state.filtersConfig[category].values[value].isChecked;
 
   return filtersConfigCopy;
 };
 
 
-///////////////
+// ////////////
 // Searching //
-///////////////
+// ////////////
 const getSearchedItems = (items, query) => {
-  let itemsToSearch = items.slice();
+  const itemsToSearch = items.slice();
   return itemsToSearch.filter(it => {
     const compareString = `${it.brand.toLowerCase()} ${it.model.toLowerCase()}`;
     return compareString.includes(query.toLowerCase());
@@ -213,12 +213,12 @@ const ActionCreator = {
 
   toggleFilter: (category, value) => ({
     type: ActionType.TOGGLE_FILTER,
-    payload: {category, value},
+    payload: { category, value },
   }),
 
   switchFilter: (category, value) => ({
     type: ActionType.SWITCH_FILTER,
-    payload: {category, value},
+    payload: { category, value },
   }),
 
   clearFilters: () => ({
@@ -274,9 +274,8 @@ const reducer = (state = initialState, action) => {
         filtersConfig: JSON.parse(JSON.stringify(FILTERS_CONFIG)),
       });
     case ActionType.APPLY_FILTERS:
-      const filteredItems = getFilteredItems(state.items, state.filtersConfig);
       return extend(state, {
-        filteredItems,
+        filteredItems: getFilteredItems(state.items, state.filtersConfig),
       });
     case ActionType.SET_CURRENT_PAGE:
       return extend(state, {

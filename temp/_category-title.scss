@@ -1,0 +1,9 @@
+.category-title {
+  // box model
+  margin-bottom: 40px;
+
+  @include atDesktopS {
+    // typography
+    font-size: 3rem;
+  }
+}

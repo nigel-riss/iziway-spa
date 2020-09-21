@@ -61,32 +61,25 @@ const StyledFilterSet = styled(FilterSet)`
   padding: 0;
   margin: 0;
   margin-bottom: 1rem;
-
   border: none;
 
   .filter__title {
     position: relative;
-
     margin-bottom: 1rem;
-
     font-size: 1.125rem;
-
     cursor: pointer;
     transition: all 0.25s ease-out;
 
     &::after {
       content: '';
-
       position: absolute;
       right: 0;
       top: 0;
       transform-origin: center center;
       transform: rotate(90deg);
-
       height: 1.5rem;
       width: 1.5rem;
       margin-left: 0.5rem;
-
       background-image: url('./assets/img/back.svg');
       background-repeat: no-repeat;
       background-size: 50%;
@@ -124,7 +117,6 @@ const StyledFilterSet = styled(FilterSet)`
   .filter__body {
     padding: 0;
     max-height: 0;
-
     overflow-y: auto;
     transition: all 0.125s linear;
 
@@ -176,21 +168,17 @@ const StyledFilterSet = styled(FilterSet)`
 
   .filter__checkbox + .filter__label {
     position: relative;
-
     margin-left: 1.5rem;
 
     &::before {
       content: '';
-
       position: absolute;
       left: -1.5rem;
       top: 0.125rem;
-
       display: inline-block;
       vertical-align: bottom;
       height: 1rem;
       width: 1rem;
-
       background-color: ${Colors.mist};
       border-radius: 50%;
     }
@@ -220,9 +208,7 @@ const StyledFilterSet = styled(FilterSet)`
     margin-left: 5px;
     margin-right: 20px;
     width: 80px;
-
     text-align: center;
-
     border: 1px solid transparent;
     border-bottom: 1px solid ${rgba(Colors.dark, 0.25)};
   }
@@ -231,7 +217,6 @@ const StyledFilterSet = styled(FilterSet)`
     width: 100%;
     margin-bottom: 20px;
     padding: 5px 20px;
-
     border: 1px solid ${rgba(Colors.dark, 0.25)};
   }
 `;

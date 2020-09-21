@@ -16,13 +16,13 @@ const SearchResult = (props) => {
       className={className}
       onClick={onSearchResultClick}
     >
-      <div className="__image">
+      <div className="search-result__image">
         <img
           src={image}
           alt={title}
         />
       </div>
-      <h3 className="__title">{title}</h3>
+      <h3 className="search-result__title">{title}</h3>
     </article>
   );
 };
@@ -34,30 +34,28 @@ const StyledSearchResult = styled(SearchResult)`
   align-items: center;
   padding-left: 1rem;
   padding-right: 2rem;
-
   cursor: pointer;
 
   &:hover {
     background-color: ${Colors.turquoise};
   }
 
-  .__image {
+  .search-result__image {
     height: 3rem;
     width: 4rem;
     min-width: 4rem;
     flex-basis: 4rem;
   }
 
-  .__image img {
+  .search-result__image img {
     height: 100%;
     width: 100%;
     object-fit: cover;
   }
 
-  .__title {
+  .search-result__title {
     flex-basis: calc(100% - 4rem);
     padding-left: 1rem;
-
     font-size: 1rem;
     white-space: nowrap;
   }

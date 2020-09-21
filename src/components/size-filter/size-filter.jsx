@@ -37,10 +37,8 @@ const SizeFilter = (props) => {
 
 const StyledSizeFilter = styled(SizeFilter)`
   position: relative;
-
   margin-right: 0.45rem;
   margin-bottom: 0.45rem;
-
   font-size: 0;
   width: 2.75rem;
   height: 2.75rem;
@@ -52,12 +50,9 @@ const StyledSizeFilter = styled(SizeFilter)`
 
   .size__checkbox {
     position: absolute;
-
     height: 0;
     width: 0;
-
     font-size: 0;
-
     opacity: 0;
   }
 
@@ -67,10 +62,8 @@ const StyledSizeFilter = styled(SizeFilter)`
     width: 100%;
     justify-content: center;
     align-items: center;
-
     font-size: 1rem;
     text-align: center;
-
     border-radius: 50%;
     background-color: ${rgba(Colors.mist, 0.5)};
     cursor: pointer;
