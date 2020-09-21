@@ -190,7 +190,8 @@ const StyledFilters = styled(Filters)`
     position: relative;
     left: 0;
     z-index: 9;
-    padding: 2rem 1rem;
+    padding: 2rem 1.5rem;
+    padding-right: 1rem;
     overflow: auto;
     background-color: ${rgba(Colors.white, 0.5)};
     backdrop-filter: blur(5px);

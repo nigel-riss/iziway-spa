@@ -130,7 +130,7 @@ const StyledFilterSet = styled(FilterSet)`
     max-height: 9999px;
 
     @media (min-width: 1000px) {
-      max-height: 250px;
+      max-height: 280px;
     }
   }
 

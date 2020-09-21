@@ -6,7 +6,7 @@ const SimpleFilter = (props) => {
     name,
     category,
     isChecked,
-    onRadioClick
+    onRadioClick,
   } = props;
 
   return (

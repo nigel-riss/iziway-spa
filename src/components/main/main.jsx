@@ -47,8 +47,13 @@ const StyledMain = styled(Main)`
   @media (min-width: 1000px) {
     max-width: 1260px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 2rem 1.5rem;
     padding-bottom: 80px;
+  }
+
+  @media (min-width: 1300px) {
+    max-width: inherit;
+    padding: 3rem calc((100% - 1260px) / 2);
   }
 
   .main__title {}
@@ -71,13 +76,13 @@ const StyledMain = styled(Main)`
   .main__filters {
     @media (min-width: 1000px) {
       padding-right: 20px;
-      flex-basis: 280px;
+      flex-basis: 300px;
     }
   }
 
   .main__catalog {
     @media (min-width: 1000px) {
-      flex-basis: 940px;
+      flex-basis: 980px;
     }
   }
 `;

@@ -6,7 +6,7 @@ import ItemCard from '../item/item.jsx';
 import Pagination from '../pagination/pagination.jsx';
 
 
-const ITEMS_PER_PAGE = 16;
+const ITEMS_PER_PAGE = 24;
 
 
 class Catalog extends PureComponent {
@@ -73,8 +73,12 @@ const StyledCatalog = styled(Catalog)`
     @media (min-width: 1000px) {
       display: flex;
       flex-wrap: wrap;
-      justify-content: flex-start;
+      justify-content: space-between;
       margin-bottom: 20px;
+    }
+
+    @media (min-width: 1300px) {
+      justify-content: flex-start;
     }
   }
 `;
