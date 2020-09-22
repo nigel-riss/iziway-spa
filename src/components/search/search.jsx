@@ -192,7 +192,7 @@ const StyledSearch = styled(Search)`
   left: 0;
   right: 0;
   margin-bottom: 1rem;
-  border-radius: 1.25rem;
+  /* border-radius: 1.25rem; */
 
   @media (min-width: 1000px) {
     z-index: 11;
@@ -234,7 +234,7 @@ const StyledSearch = styled(Search)`
     width: 2rem;
     padding: 0.5rem 0.25rem;
     border: none;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     background-color: ${Colors.turquoise};
     background-image: url('./assets/img/x.svg');
     background-position: center center;
@@ -259,7 +259,7 @@ const StyledSearch = styled(Search)`
     padding-left: 6rem;
     width: 100%;
     border: 1px solid ${rgba(Colors.dark, 0.5)};
-    border-radius: 1.25rem;
+    /* border-radius: 1.25rem; */
     background-image: url('./assets/img/search.svg');
     background-repeat: no-repeat;
     background-size: 1.5rem;
@@ -276,11 +276,11 @@ const StyledSearch = styled(Search)`
     z-index: 1;
     top: -1rem;
     display: none;
-    padding-top: 2rem;
+    padding-top: 1rem;
     width: 100%;
     background-color: ${Colors.white};
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    /* border-bottom-left-radius: 1rem; */
+    /* border-bottom-right-radius: 1rem; */
     overflow: hidden;
   }
 
@@ -296,12 +296,18 @@ const StyledSearch = styled(Search)`
     border: none;
     background-color: ${rgba(Colors.mist, 0.25)};
     cursor: pointer;
+    transition: all 0.25s ease-out;
 
     &:hover {
+      color: ${Colors.white};
       background-color: ${Colors.turquoise};
 
       &::after {
         background-color: ${rgba(Colors.mist, 0.5)};
+      }
+
+      &::before {
+        background-image: url('./assets/img/back--white.svg');
       }
     }
 

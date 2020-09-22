@@ -7,11 +7,11 @@ const Footer = (props) => {
   const { className } = props;
   return (
     <footer className={className}>
-      <div className="__logo">
+      <div className="footer__logo">
         <img src="./assets/img/footer-logo.svg" alt="Логотип IZIway"/>
       </div>
-      <p className="__copy">
-          IZIway Shop &copy; 2019 — {new Date().getFullYear()}
+      <p className="footer__copy">
+          IZIway Shop &copy; 2019 — {new Date().getFullYear()}&nbsp;&nbsp;❤
       </p>
     </footer>
   );
@@ -24,13 +24,13 @@ const StyledFooter = styled(Footer)`
   text-align: center;
   background-color: ${Colors.dark};
 
-  .__logo {
+  .footer__logo {
     margin: 0 auto;
     margin-bottom: 1.5rem;
     width: 9rem;
   }
 
-  .__copy {
+  .footer__copy {
     color: ${Colors.mist};
     font-size: 1rem;
   }

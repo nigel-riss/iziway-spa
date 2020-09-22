@@ -9,7 +9,8 @@ import {
 
 const sneakers = data.filter((it) => {
   const category = it.name.split(` `)[0];
-  return category !== `Кроссовки`;
+  // return category !== `Кроссовки`;
+  return category === `Кроссовки`;
 });
 
 

@@ -280,12 +280,12 @@ const StyledFilters = styled(Filters)`
     display: block;
     margin-top: 1.5rem;
     padding: 0.5rem 1.5rem;
+    padding-bottom: 0.625rem;
     width: 100%;
     color: ${Colors.turquoise};
     font-size: 1.125rem;
     border: 2px solid transparent;
     background-color: ${Colors.dark};
-    border-radius: 2rem;
     cursor: pointer;
     transition: all 0.25s ease-out;
 
@@ -303,12 +303,12 @@ const StyledFilters = styled(Filters)`
     display: block;
     margin-top: 1rem;
     padding: 0.5rem 1.5rem;
+    padding-bottom: 0.625rem;
     width: 100%;
     color: ${Colors.dark};
     font-size: 1.125rem;
     border: 2px solid ${Colors.dark};
     background-color: ${Colors.white};
-    border-radius: 2rem;
 
     &:hover {
       background-color: ${Colors.turquoise};

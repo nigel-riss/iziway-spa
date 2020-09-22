@@ -106,7 +106,7 @@ const StyledPagination = styled(Pagination)`
     text-align: center;
     text-decoration: none;
     border: 1px solid ${rgba(Colors.mist, 0.5)};
-    border-radius: 1rem;
+    /* border-radius: 1rem; */
     transition: all 0.25s ease-out;
 
     &:hover {

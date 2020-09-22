@@ -37,6 +37,7 @@ const StyledSearchResult = styled(SearchResult)`
   cursor: pointer;
 
   &:hover {
+    color: ${Colors.white};
     background-color: ${Colors.turquoise};
   }
 

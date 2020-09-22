@@ -24,7 +24,9 @@ class Header extends React.Component {
           </div>
         </div>
         <nav className="header__nav">
-          <a href="https://iziway.ru/" className="header__franchise-link">Франшиза IZIway Shop</a>
+          <div className="header__franchise">
+            <a href="https://iziway.ru/" className="header__franchise-link">Франшиза IZIway Shop</a>
+          </div>
           <ul className="header__nav-list">
             <li className="header__nav-item"><a href="#">Кроссовки</a></li>
             <li className="header__nav-item"><a href="#">Одежда</a></li>
@@ -59,8 +61,8 @@ const StyledHeader = styled(Header)`
     @media (min-width: 1000px) {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3rem;
+      align-items: flex-end;
+      margin-bottom: 2rem;
     }
   }
 
@@ -90,7 +92,67 @@ const StyledHeader = styled(Header)`
     }
   }
 
-  .header__nav {}
+  .header__nav {
+    @media (min-width: 1000px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .header__franchise {
+    display: block;
+    text-align: center;
+  }
+
+  .header__franchise-link {
+    position: relative;
+    color: ${Colors.turquoise};
+    font-size: 1.125rem;
+    font-weight: 400;
+    text-decoration: none;
+    
+    &:hover {
+      color: ${Colors.red};
+    }
+
+    
+    @media (min-width: 1000px) {
+      color: ${Colors.dark};
+      font-size: 1.25rem;
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: -2rem;
+        top: 0.125rem;
+        transform: rotate(90deg);
+        height: 1.5rem;
+        width: 1.5rem;
+        background-image: url('./assets/img/back.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        /* border-radius: 50%; */
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -1.25rem;
+        height: 1px;
+        width: 8rem;
+        background-color: ${Colors.turquoise};
+      }
+
+      &:hover {
+        color: ${Colors.turquoise};
+      }
+
+      &:hover::after {
+        background-image: url('./assets/img/back--turquoise.svg');
+      }
+    }
+  }
 
   .header__nav-list {
     @media (min-width: 1000px) {
@@ -102,12 +164,13 @@ const StyledHeader = styled(Header)`
   .header__nav-item {
     margin: 1rem 0;
     font-size: 1.125rem;
-    font-weight: 300;
+    font-weight: 400;
     text-align: center;
 
     @media (min-width: 1000px) {
-      margin: 1rem 2rem;
-      font-size: 1.375rem;
+      margin: 1rem 1.5rem;
+      margin-left: 2rem;
+      font-size: 1.25rem;
     }
   }
 
