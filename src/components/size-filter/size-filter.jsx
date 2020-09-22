@@ -64,7 +64,7 @@ const StyledSizeFilter = styled(SizeFilter)`
     align-items: center;
     font-size: 1rem;
     text-align: center;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     background-color: ${rgba(Colors.mist, 0.5)};
     cursor: pointer;
 
