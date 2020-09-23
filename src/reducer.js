@@ -200,6 +200,7 @@ const initialState = {
 };
 
 const ActionType = {
+  SET_ACTIVE_GROUP: `SET_ACTIVE_GROUP`,
   SET_ACTIVE_ITEM: `SET_ACTIVE_ITEM`,
   CLEAR_ACTIVE_ITEM: `CLEAR_ACTIVE_ITEM`,
   TOGGLE_FILTER: `TOGGLE_FILTER`,
@@ -214,6 +215,11 @@ const ActionType = {
 
 
 const ActionCreator = {
+  setActiveGroup: (groupName) => ({
+    type: ActionType.SET_ACTIVE_GROUP,
+    payload: groupName,
+  }),
+
   setActiveItem: (item) => ({
     type: ActionType.SET_ACTIVE_ITEM,
     payload: item,
@@ -265,6 +271,10 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.SET_ACTIVE_GROUP:
+      return extend(state, {
+        items: _getItemsFromGroup(data, action.payload),
+      });
     case ActionType.SET_ACTIVE_ITEM:
       return extend(state, {
         activeItem: action.payload,
@@ -283,7 +293,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.CLEAR_FILTERS:
       return extend(state, {
-        filtersConfig: JSON.parse(JSON.stringify(FILTERS_CONFIG_BOILERPLATE)),
+        filtersConfig: _setFiltersValues(state.items, FILTERS_CONFIG_BOILERPLATE),
       });
     case ActionType.APPLY_FILTERS:
       return extend(state, {

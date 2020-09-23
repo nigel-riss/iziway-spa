@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Search from '../search/search.jsx';
 import styled from 'styled-components';
 import { rgba } from 'polished';
 import { Colors } from '../../utils/const.js';
+import { ActionCreator } from '../../reducer.js';
 
 
 class Header extends React.Component {
@@ -11,7 +13,10 @@ class Header extends React.Component {
   }
 
   render () {
-    const { className } = this.props;
+    const {
+      className,
+      onGroupLinkClick,
+    } = this.props;
 
     return (
       <header className={className}>
@@ -28,9 +33,15 @@ class Header extends React.Component {
             <a href="https://iziway.ru/" className="header__franchise-link">Франшиза IZIway Shop</a>
           </div>
           <ul className="header__nav-list">
-            <li className="header__nav-item"><a href="#">Кроссовки</a></li>
-            <li className="header__nav-item"><a href="#">Одежда</a></li>
-            <li className="header__nav-item"><a href="#">Аксессуары</a></li>
+            <li className="header__nav-item">
+              <a href="#" onClick={() => { onGroupLinkClick(`FOOTWEAR`); }}>Обувь</a>
+            </li>
+            <li className="header__nav-item">
+              <a href="#" onClick={() => { onGroupLinkClick(`ACCESSORIES`); }}>Аксессуары</a>
+            </li>
+            <li className="header__nav-item">
+              <a href="#" onClick={() => { onGroupLinkClick(`CLOTHES`); }}>Одежда</a>
+            </li>
           </ul>
         </nav>
       </header>
@@ -185,4 +196,13 @@ const StyledHeader = styled(Header)`
 `;
 
 
-export default StyledHeader;
+const mapDispatchToProps = (dispatch) => ({
+  onGroupLinkClick (groupName) {
+    dispatch(ActionCreator.setActiveGroup(groupName));
+    dispatch(ActionCreator.clearFilters());
+    dispatch(ActionCreator.applyFilters());
+  },
+});
+
+
+export default connect(null, mapDispatchToProps)(StyledHeader);
