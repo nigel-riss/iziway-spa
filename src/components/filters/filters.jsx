@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { rgba } from 'polished';
 import { Colors } from '../../utils/const.js';
-import { connect } from 'react-redux';
+import {
+  ColorNameToHexMap,
+} from '../../utils/style.js';
 import {
   ActionCreator,
   FilterType,
@@ -104,12 +107,12 @@ class Filters extends PureComponent {
         return (
           <React.Fragment>
             {Object.keys(config.values).map((value, i) => {
-              if (!value) return;
+              // if (!value) return;
+              if (!value || !ColorNameToHexMap[value.toLowerCase()]) return;
               return (
                 <ColorFilter
                   key={`${i}=${value}`}
-                  color={value || `Белый`}
-                  // TODO: Fix color filters issue
+                  color={value}
                   category={config.categoryKey}
                   isChecked={config.values[value].isChecked}
                   onCheckboxClick={onRadioClick}

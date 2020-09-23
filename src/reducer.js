@@ -1,70 +1,32 @@
-// import data from './mocks/bizoutmax.origin.js';
 import data from './mocks/fix-biz.json';
 import {
   extend,
   getValuesCount,
   getAllSizes,
 } from './utils/data.js';
+import { GroupToCategoryArray } from './utils/const.js';
 
 
-const sneakers = data.filter((it) => {
-  const category = it.name.split(` `)[0];
-  // return category !== `Кроссовки`;
-  return category === `Кроссовки`;
-});
+// //////////////
+// Item groups //
+// //////////////
+const _getItemsFromGroup = (data, groupName) => {
+  const categories = GroupToCategoryArray[groupName];
+  return data.filter((item) => {
+    return categories.some((categoryName) => {
+      return item.name.split(` `)[0] === categoryName;
+    });
+  });
+};
+
+
+// const sneakers = _getItemsFromGroup(data, `ACCESSORIES`);
+const sneakers = _getItemsFromGroup(data, `CLOTHES`);
 
 
 // ////////////
 // Filtering //
 // ////////////
-
-const getFilteredItems = (items, filtersConfig) => {
-  let itemsToFilter = items.slice();
-  const configs = Object.entries(filtersConfig);
-
-  configs.forEach((config) => {
-    const [
-      category,
-      settings,
-    ] = config;
-
-    const filteringValues = Object
-      .entries(settings.values)
-      .filter((it) => it[1].isChecked === true);
-
-    const isFiltering = filteringValues.length > 0;
-
-    if (isFiltering) {
-      itemsToFilter = filterItems(
-        itemsToFilter,
-        category,
-        settings.type,
-        filteringValues
-      );
-    }
-  });
-
-  return itemsToFilter;
-};
-
-
-const filterItems = (items, category, type, filteringValues) => {
-  items = items.filter((item) => {
-    return filteringValues.some((value) => {
-      switch (type) {
-        case FilterType.SIZE:
-          return item[category].includes(value[0]);
-        case FilterType.SIMPLE:
-        case FilterType.COLOR:
-          return value[0] === item[category];
-      }
-    });
-  });
-
-  return items;
-};
-
-
 const FilterType = {
   SIMPLE: `SIMPLE`,
   MIN_MAX: `MIN_MAX`,
@@ -72,7 +34,7 @@ const FilterType = {
   SIZE: `SIZE`,
 };
 
-const FILTERS_CONFIG = {
+const FILTERS_CONFIG_BOILERPLATE = {
   type: {
     name: `Категория`,
     type: FilterType.SIMPLE,
@@ -119,32 +81,83 @@ const FILTERS_CONFIG = {
   },
 };
 
+const _getFilteredItems = (items, filtersConfig) => {
+  let itemsToFilter = items.slice();
+  const configs = Object.entries(filtersConfig);
 
-for (const key in FILTERS_CONFIG) {
-  const config = FILTERS_CONFIG[key];
+  configs.forEach((config) => {
+    const [
+      category,
+      settings,
+    ] = config;
 
-  switch (config.type) {
-    case FilterType.SIMPLE:
-    case FilterType.COLOR:
-      config.values = getValuesCount(sneakers, config.categoryKey);
-      for (const key in config.values) {
-        config.values[key].isChecked = false;
+    const filteringValues = Object
+      .entries(settings.values)
+      .filter((it) => it[1].isChecked === true);
+
+    const isFiltering = filteringValues.length > 0;
+
+    if (isFiltering) {
+      itemsToFilter = _filterItems(
+        itemsToFilter,
+        category,
+        settings.type,
+        filteringValues
+      );
+    }
+  });
+
+  return itemsToFilter;
+};
+
+
+const _filterItems = (items, category, type, filteringValues) => {
+  items = items.filter((item) => {
+    return filteringValues.some((value) => {
+      switch (type) {
+        case FilterType.SIZE:
+          return item[category].includes(value[0]);
+        case FilterType.SIMPLE:
+        case FilterType.COLOR:
+          return value[0] === item[category];
       }
-      break;
-    case FilterType.SIZE:
-      config.values = getAllSizes(sneakers)
-        .reduce((acc, size) => {
-          acc[size] = {
-            isChecked: false,
-          };
-          return acc;
-        }, {});
-      break;
-    case FilterType.MIN_MAX:
-      break;
-  }
-}
+    });
+  });
 
+  return items;
+};
+
+const _setFiltersValues = (items, filtersConfigBoilerplate) => {
+  const filtersConfig = JSON
+    .parse(JSON.stringify(filtersConfigBoilerplate));
+
+  for (const key in filtersConfig) {
+    const config = filtersConfig[key];
+
+    switch (config.type) {
+      case FilterType.SIMPLE:
+      case FilterType.COLOR:
+        config.values = getValuesCount(items, config.categoryKey);
+        for (const key in config.values) {
+          config.values[key].isChecked = false;
+        }
+        break;
+      case FilterType.SIZE:
+        config.values = getAllSizes(items)
+          .reduce((acc, size) => {
+            acc[size] = {
+              isChecked: false,
+            };
+            return acc;
+          }, {});
+        break;
+      case FilterType.MIN_MAX:
+        break;
+    }
+  }
+
+  return filtersConfig;
+};
 
 const _toggleFilter = (state, { category, value }) => {
   const filtersConfigCopy = JSON.parse(JSON.stringify(state.filtersConfig));
@@ -158,7 +171,6 @@ const _switchFilter = (state, { category, value }) => {
     .forEach(key => {
       filtersConfigCopy[category].values[key].isChecked = false;
     });
-  // filtersConfigCopy[category][`values`][value][`isChecked`] = true;
   filtersConfigCopy[category].values[value].isChecked = !state.filtersConfig[category].values[value].isChecked;
 
   return filtersConfigCopy;
@@ -180,13 +192,12 @@ const getSearchedItems = (items, query) => {
 const initialState = {
   items: sneakers.slice(),
   filteredItems: sneakers.slice(),
-  filtersConfig: JSON.parse(JSON.stringify(FILTERS_CONFIG)),
+  filtersConfig: _setFiltersValues(sneakers.slice(), FILTERS_CONFIG_BOILERPLATE),
   activeItem: null,
   currentPage: 0,
   isFiltersPaneShown: false,
   foundItems: [],
 };
-
 
 const ActionType = {
   SET_ACTIVE_ITEM: `SET_ACTIVE_ITEM`,
@@ -272,11 +283,11 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.CLEAR_FILTERS:
       return extend(state, {
-        filtersConfig: JSON.parse(JSON.stringify(FILTERS_CONFIG)),
+        filtersConfig: JSON.parse(JSON.stringify(FILTERS_CONFIG_BOILERPLATE)),
       });
     case ActionType.APPLY_FILTERS:
       return extend(state, {
-        filteredItems: getFilteredItems(state.items, state.filtersConfig),
+        filteredItems: _getFilteredItems(state.items, state.filtersConfig),
       });
     case ActionType.SET_CURRENT_PAGE:
       return extend(state, {

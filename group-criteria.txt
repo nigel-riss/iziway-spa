@@ -1,22 +1,114 @@
 Кроссовки
-name starts with Кроссовки
 name starts with Ботинки
 name starts with Кеды
+name starts with Кроссовки
+name starts with Кроcсовки (неверное написание, первая "с" латинская, зачем?)
+name starts with Мокасины
+name starts with Сандали
+name starts with Сандалии
+name starts with Сапоги
+name starts with Сланцы
 
 Аксессуары
+name starts with Bluetooth-гарнитура
+name starts with Card
+name starts with FM-трансмиттер
+name starts with USB
+name starts with Браслет
+name starts with Брелок
+name starts with Бутылка
+name starts with Велосипедный (шлем)
+name starts with Велонабор
+name starts with Визитница
+name starts with Губка
+name starts with Дата-кабель
+name starts with Держатель
+name starts with Зажим
+name starts with Зарядное (устройство)
+name starts with Защитное (стекло)
+name starts with Зонт
+name starts with Кабель
+name starts with Карты (игральные)
+name starts with Коврик
+name starts with Колонка
+name starts with Кольцо
+name starts with Комплект
+name starts with Кошелек
+name starts with Кошелёк
+name starts with Кресло
+name starts with Кружка
+name starts with Лампа
+name starts with Набор
+name starts with Насос
+name starts with Наушник
+name starts with Наушники
+name starts with Нашивка
+name starts with Нож-карта
+name starts with Очки
+name starts with Пистолет
+name starts with Подвеска
+name starts with Подушка
+name starts with Полумаска
+name starts with Портмоне
+name starts with Портсигар
+name starts with Поясная (сумка)
+name starts with Ремень
+name starts with Ручка
 name starts with Рюкзак
+name starts with Секундомер
+name starts with Скакалка
+name starts with Стикеры
 name starts with Сумка
+name starts with Табличка
+name starts with Термокружка
+name starts with Фонарик
+name starts with Футбольный (мяч)
 name starts with Часы
-
+name starts with Чехол
+name starts with Щитки
+name starts with Эспандер
 
 Одежда
-name starts with Носки
-name starts with Шапка
+name starts with Анорак
+name starts with Бандана
+name starts with Боксеры
+name starts with Бомбер
+name starts with Брюки
+name starts with Велокостюм
+name starts with Велошорты
+name starts with Ветровка
+name starts with Гетры
+name starts with Горнолыжные (перчатки)
+name starts with Джерси
+name starts with Джинсы
+name starts with Джоггеры
+name starts with Жилет
+name starts with Кардиган
+name starts with Кепка
 name starts with Куртка
-name starts with Свитшот
-name starts with Парка
 name starts with Леггинсы
+name starts with Майка
+name starts with Носки
+name starts with Олимпийка
+name starts with Панама
+name starts with Парка
+name starts with Перчатки
+name starts with Поло
+name starts with Полукомбинезон
+name starts with Рашгард
+name starts with Рубашка
+name starts with Свитшот
 name starts with Спортивный (костюм)
-name starts with Тренировочный (костюм)
+name starts with Тайтсы
+name starts with Термобельё
+name starts with Толстовка
+name starts with Топ
+name starts with Тренировочный
+name starts with Футболка
+name starts with Футболка-обманка
+name starts with Футбольная (форма)
 name starts with Худи
+name starts with Шапка
+name starts with Шарф
+name starts with Шорты
 

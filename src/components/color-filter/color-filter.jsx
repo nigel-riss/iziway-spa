@@ -17,7 +17,7 @@ const ColorFilter = (props) => {
     onCheckboxClick,
   } = props;
 
-  const colorHexArray = ColorNameToHexMap[color] || [`#ffffff`];
+  const colorHexArray = ColorNameToHexMap[color.toLowerCase()] || [`#ffffff`];
 
   return (
     <div className={className}>

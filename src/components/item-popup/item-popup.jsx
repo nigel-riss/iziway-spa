@@ -129,7 +129,7 @@ const StyledItemPopup = styled(ItemPopup)`
     font-size: 0;
     border: none;
     border-radius: 50%;
-    background-color: ${rgba(Colors.mist, 0.5)};
+    background-color: ${rgba(Colors.mist, 1)};
     transition: all 0.25s ease-in-out;
 
     @media (min-width: 1000px) {

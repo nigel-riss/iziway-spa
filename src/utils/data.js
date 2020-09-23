@@ -1,7 +1,7 @@
 export const getValuesCount = (objectsArray, key) => {
   return objectsArray.reduce((acc, curr) => {
     const value = curr[key];
-    acc[value] ? acc[value][`count`]++ : acc[value] = {count: 1};
+    acc[value] ? acc[value].count++ : acc[value] = { count: 1 };
     return acc;
   }, {});
 };
@@ -21,7 +21,7 @@ export const getAllSizes = (objectsArray) => {
       const sizes = object && object.sizes ? object.sizes.split(`,`) : [];
       sizes.forEach((size) => {
         ~acc.indexOf(+size) || acc.push(+size);
-      })
+      });
       return acc;
     }, [])
     .sort();
