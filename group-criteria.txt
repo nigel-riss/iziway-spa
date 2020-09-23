@@ -1,0 +1,22 @@
+Кроссовки
+name starts with Кроссовки
+name starts with Ботинки
+name starts with Кеды
+
+Аксессуары
+name starts with Рюкзак
+name starts with Сумка
+name starts with Часы
+
+
+Одежда
+name starts with Носки
+name starts with Шапка
+name starts with Куртка
+name starts with Свитшот
+name starts with Парка
+name starts with Леггинсы
+name starts with Спортивный (костюм)
+name starts with Тренировочный (костюм)
+name starts with Худи
+

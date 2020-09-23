@@ -193,6 +193,7 @@ const StyledFilters = styled(Filters)`
     padding: 2rem 1.5rem;
     padding-right: 1rem;
     overflow: auto;
+    /* border: 1px solid ${rgba(Colors.mist, 0.25)}; */
     background-color: ${rgba(Colors.white, 0.5)};
     backdrop-filter: blur(5px);
   }
