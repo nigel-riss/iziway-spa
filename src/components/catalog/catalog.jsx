@@ -32,7 +32,7 @@ class Catalog extends PureComponent {
           {itemsToShow.map((item, i) => {
             return (
               <ItemCard
-                key={`${i}`}
+                key={`${i} ${item.name}`}
                 item={item}
                 onCardClick={onCardClick}
               />

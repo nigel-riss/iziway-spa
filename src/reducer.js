@@ -108,11 +108,13 @@ const _getFilteredItems = (items, filtersConfig) => {
 
 
 const _filterItems = (items, category, type, filteringValues) => {
+  console.table(category, type, filteringValues);
   items = items.filter((item) => {
     return filteringValues.some((value) => {
       switch (type) {
         case FilterType.SIZE:
-          return item[category].includes(value[0]);
+          return item.sizes.split(`,`)
+            .some((it) => parseInt(it, 10) === parseInt((value[0]), 10));
         case FilterType.SIMPLE:
         case FilterType.COLOR:
           return value[0] === item[category];
