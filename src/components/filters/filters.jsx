@@ -43,6 +43,8 @@ class Filters extends PureComponent {
 
         {Object.entries(filtersConfig).map((entry) => {
           const [, config] = entry;
+          if (Object.keys(config.values).length < 2) return null;
+
           return (
             <FilterSet
               key={config.name}
