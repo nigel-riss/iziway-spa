@@ -63,6 +63,12 @@ const StyledFilterSet = styled(FilterSet)`
   margin-bottom: 1rem;
   border: none;
 
+  &:hover .filter__body{
+    ::-webkit-scrollbar-thumb {
+      background-color: ${Colors.mist};
+    }
+  }
+
   .filter__title {
     position: relative;
     margin-bottom: 1rem;

@@ -225,8 +225,8 @@ const StyledSearch = styled(Search)`
   .search__clear {
     position: absolute;
     z-index: 3;
-    right: 0.125rem;
-    top: 0.125rem;
+    right: 3px;
+    top: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -258,15 +258,18 @@ const StyledSearch = styled(Search)`
     padding: 0.325rem 1.25rem;
     padding-left: 6rem;
     width: 100%;
-    border: 1px solid ${rgba(Colors.dark, 0.5)};
-    /* border-radius: 1.25rem; */
+    border: 2px solid ${rgba(Colors.mist, 0.5)};
     background-image: url('./assets/img/search.svg');
     background-repeat: no-repeat;
     background-size: 1.5rem;
     background-position: center left 2rem;
 
+    &:hover {
+      border: 2px solid ${rgba(Colors.mist, 1)};
+    }
+
     &:focus {
-      border: 1px solid ${rgba(Colors.turquoise, 0.75)};
+      border: 2px solid ${rgba(Colors.turquoise, 0.75)};
       outline: none;
     }
   }
@@ -279,8 +282,6 @@ const StyledSearch = styled(Search)`
     padding-top: 1rem;
     width: 100%;
     background-color: ${Colors.white};
-    /* border-bottom-left-radius: 1rem; */
-    /* border-bottom-right-radius: 1rem; */
     overflow: hidden;
   }
 
