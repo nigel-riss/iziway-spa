@@ -7,6 +7,13 @@ export const Colors = {
 };
 
 
+export const ITEM_GROUPS = {
+  FOOTWEAR: `Обувь`,
+  CLOTHES: `Одежда`,
+  ACCESSORIES: `Аксессуары`,
+};
+
+
 export const GroupToCategoryArray = {
   FOOTWEAR: [
     `Ботинки`,

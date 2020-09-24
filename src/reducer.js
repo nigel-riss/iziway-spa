@@ -20,10 +20,6 @@ const _getItemsFromGroup = (data, groupName) => {
 };
 
 
-// const sneakers = _getItemsFromGroup(data, `ACCESSORIES`);
-const sneakers = _getItemsFromGroup(data, `CLOTHES`);
-
-
 // ////////////
 // Filtering //
 // ////////////
@@ -189,10 +185,13 @@ const getSearchedItems = (items, query) => {
 };
 
 
+const initialItems = _getItemsFromGroup(data, `FOOTWEAR`);
+
 const initialState = {
-  items: sneakers.slice(),
-  filteredItems: sneakers.slice(),
-  filtersConfig: _setFiltersValues(sneakers.slice(), FILTERS_CONFIG_BOILERPLATE),
+  items: initialItems.slice(),
+  activeGroup: `FOOTWEAR`,
+  filteredItems: initialItems.slice(),
+  filtersConfig: _setFiltersValues(initialItems.slice(), FILTERS_CONFIG_BOILERPLATE),
   activeItem: null,
   currentPage: 0,
   isFiltersPaneShown: false,
@@ -274,6 +273,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_ACTIVE_GROUP:
       return extend(state, {
         items: _getItemsFromGroup(data, action.payload),
+        activeGroup: action.payload,
       });
     case ActionType.SET_ACTIVE_ITEM:
       return extend(state, {

@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Search from '../search/search.jsx';
 import styled from 'styled-components';
 import { rgba } from 'polished';
 import { Colors } from '../../utils/const.js';
-import { ActionCreator } from '../../reducer.js';
+import GroupNav from '../group-nav/group-nav.jsx';
 
 
 class Header extends React.Component {
@@ -15,7 +14,6 @@ class Header extends React.Component {
   render () {
     const {
       className,
-      onGroupLinkClick,
     } = this.props;
 
     return (
@@ -32,17 +30,7 @@ class Header extends React.Component {
           <div className="header__franchise">
             <a href="https://iziway.ru/" className="header__franchise-link">Франшиза IZIway Shop</a>
           </div>
-          <ul className="header__nav-list">
-            <li className="header__nav-item">
-              <a href="#" onClick={() => { onGroupLinkClick(`FOOTWEAR`); }}>Обувь</a>
-            </li>
-            <li className="header__nav-item">
-              <a href="#" onClick={() => { onGroupLinkClick(`ACCESSORIES`); }}>Аксессуары</a>
-            </li>
-            <li className="header__nav-item">
-              <a href="#" onClick={() => { onGroupLinkClick(`CLOTHES`); }}>Одежда</a>
-            </li>
-          </ul>
+          <GroupNav/>
         </nav>
       </header>
     );
@@ -164,45 +152,7 @@ const StyledHeader = styled(Header)`
       }
     }
   }
-
-  .header__nav-list {
-    @media (min-width: 1000px) {
-      display: flex;
-      justify-content: center;
-    }
-  }
-
-  .header__nav-item {
-    margin: 1rem 0;
-    font-size: 1.125rem;
-    font-weight: 400;
-    text-align: center;
-
-    @media (min-width: 1000px) {
-      margin: 1rem 1.5rem;
-      margin-left: 2rem;
-      font-size: 1.25rem;
-    }
-  }
-
-  .header__nav-item a {
-    color: ${Colors.dark};
-    text-decoration: none;
-
-    &:hover {
-      color: ${Colors.turquoise};
-    }
-  }
 `;
 
 
-const mapDispatchToProps = (dispatch) => ({
-  onGroupLinkClick (groupName) {
-    dispatch(ActionCreator.setActiveGroup(groupName));
-    dispatch(ActionCreator.clearFilters());
-    dispatch(ActionCreator.applyFilters());
-  },
-});
-
-
-export default connect(null, mapDispatchToProps)(StyledHeader);
+export default StyledHeader;
