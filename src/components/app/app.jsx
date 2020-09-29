@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import history from '../../history.js';
-import { getItemById } from '../../reducer.js';
+import {
+  ActionCreator,
+  getItemById,
+} from '../../reducer.js';
 import { DEFAULT_ITEM_GROUP } from '../../utils/const.js';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
@@ -26,6 +29,14 @@ const _renderItemPopup = (id, itemGroup) => {
 class App extends React.Component {
   constructor (props) {
     super(props);
+  }
+
+  componentDidMount () {
+    const { onComponentReady } = this.props;
+    const { itemGroup } = this.props.match.params;
+    if (itemGroup) {
+      onComponentReady(itemGroup);
+    }
   }
 
   render () {
@@ -71,6 +82,13 @@ const mapStateToProps = (state) => ({
   isFiltersPaneShown: state.isFiltersPaneShown,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onComponentReady (itemGroup) {
+    dispatch(ActionCreator.clearFilters(itemGroup));
+    dispatch(ActionCreator.applyFilters(itemGroup));
+  },
+});
+
 
 const StyledApp = styled(App)`
   background-image: url('./assets/img/app-bg.svg');
@@ -83,4 +101,4 @@ const StyledApp = styled(App)`
 `;
 
 
-export default connect(mapStateToProps, null)(StyledApp);
+export default connect(mapStateToProps, mapDispatchToProps)(StyledApp);
