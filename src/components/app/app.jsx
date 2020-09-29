@@ -54,9 +54,6 @@ class App extends React.Component {
       ? document.body.classList.add(`overflow-hidden`)
       : document.body.classList.remove(`overflow-hidden`);
 
-    console.log(this.props.match);
-    console.log(itemGroup, itemId);
-
     if (!itemGroup) {
       history.push(`/${DEFAULT_ITEM_GROUP}`);
     }
@@ -91,7 +88,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 const StyledApp = styled(App)`
-  background-image: url('./assets/img/app-bg.svg');
+  background-image: url('/assets/img/app-bg.svg');
   background-repeat: no-repeat;
   background-size: contain;
 

@@ -50,7 +50,7 @@ const StyledButtons = styled(Buttons)`
   border-radius: 2rem;
 
   background-color: transparent;
-  background-image: url('./assets/img/filter.svg');
+  background-image: url('/assets/img/filter.svg');
   background-repeat: no-repeat;
   background-position: center left 1rem;
   background-size: 1rem;

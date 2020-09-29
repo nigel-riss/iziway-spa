@@ -150,7 +150,6 @@ const _getFilteredItems = (items, filtersConfig) => {
 };
 
 const _filterItems = (items, category, type, filteringValues) => {
-  console.table(category, type, filteringValues);
   items = items.filter((item) => {
     return filteringValues.some((value) => {
       switch (type) {
@@ -168,14 +167,12 @@ const _filterItems = (items, category, type, filteringValues) => {
 };
 
 const _toggleFilter = (state, { category, value }) => {
-  console.log(state, category, value);
   const filtersConfigCopy = JSON.parse(JSON.stringify(state.filtersConfig));
   filtersConfigCopy[category].values[value].isChecked = !state.filtersConfig[category].values[value].isChecked;
   return filtersConfigCopy;
 };
 
 const _switchFilter = (state, { category, value }) => {
-  console.log(state, category, value);
   const filtersConfigCopy = JSON.parse(JSON.stringify(state.filtersConfig));
   Object.keys(filtersConfigCopy[category].values)
     .forEach(key => {

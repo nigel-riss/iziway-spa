@@ -86,7 +86,7 @@ const StyledFilterSet = styled(FilterSet)`
       height: 1.5rem;
       width: 1.5rem;
       margin-left: 0.5rem;
-      background-image: url('./assets/img/back.svg');
+      background-image: url('/assets/img/back.svg');
       background-repeat: no-repeat;
       background-size: 50%;
       background-position: center center;

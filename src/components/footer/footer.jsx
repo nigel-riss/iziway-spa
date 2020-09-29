@@ -8,7 +8,7 @@ const Footer = (props) => {
   return (
     <footer className={className}>
       <div className="footer__logo">
-        <img src="./assets/img/footer-logo.svg" alt="Логотип IZIway"/>
+        <img src="/assets/img/footer-logo.svg" alt="Логотип IZIway"/>
       </div>
       <p className="footer__copy">
           IZIway Shop &copy; 2019 — {new Date().getFullYear()}&nbsp;&nbsp;❤

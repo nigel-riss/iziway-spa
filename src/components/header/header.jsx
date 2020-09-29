@@ -21,7 +21,7 @@ class Header extends React.Component {
       <header className={className}>
         <div className="header__top">
           <div className="header__logo">
-            <img src="./assets/img/logo.svg" alt="Логотип IZIway"/>
+            <img src="/assets/img/logo.svg" alt="Логотип IZIway"/>
           </div>
           <div className="header__search">
             <Search
@@ -135,7 +135,7 @@ const StyledHeader = styled(Header)`
         transform: rotate(90deg);
         height: 1.5rem;
         width: 1.5rem;
-        background-image: url('./assets/img/back.svg');
+        background-image: url('/assets/img/back.svg');
         background-repeat: no-repeat;
         background-position: center;
         /* border-radius: 50%; */
@@ -155,7 +155,7 @@ const StyledHeader = styled(Header)`
       }
 
       &:hover::after {
-        background-image: url('./assets/img/back--turquoise.svg');
+        background-image: url('/assets/img/back--turquoise.svg');
       }
     }
   }
