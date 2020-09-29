@@ -28,7 +28,7 @@ const ColorFilter = (props) => {
         id={`color-${color}`}
         checked={isChecked}
         onChange={() => {
-          onCheckboxClick(category, color);
+          onCheckboxClick();
         }}
       />
       <label

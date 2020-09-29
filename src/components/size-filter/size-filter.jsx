@@ -21,7 +21,7 @@ const SizeFilter = (props) => {
         id={`size-${size}`}
         checked={isChecked}
         onChange={() => {
-          onCheckboxClick(category, size);
+          onCheckboxClick();
         }}
       />
       <label

@@ -18,7 +18,7 @@ const SimpleFilter = (props) => {
         name={category}
         checked={isChecked}
         onChange={() => {
-          onRadioClick(category, name);
+          onRadioClick();
         }}
       />
       <label

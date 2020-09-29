@@ -26,6 +26,7 @@ class Filters extends PureComponent {
       className,
       filtersConfig,
       isFiltersPaneShown,
+      itemGroup,
       onCloseButtonClick,
       onResetButtonClick,
     } = this.props;
@@ -62,7 +63,7 @@ class Filters extends PureComponent {
           value="Сбросить"
           onClick={(evt) => {
             evt.preventDefault();
-            onResetButtonClick();
+            onResetButtonClick(itemGroup);
           }}
         />
 
@@ -81,6 +82,7 @@ class Filters extends PureComponent {
 
   _getFilterSet (config) {
     const {
+      itemGroup,
       onCheckboxClick,
       onRadioClick,
     } = this.props;
@@ -98,7 +100,9 @@ class Filters extends PureComponent {
                   category={config.categoryKey}
                   count={config.values[value].count}
                   isChecked={config.values[value].isChecked}
-                  onRadioClick={onRadioClick}
+                  onRadioClick={() => {
+                    onRadioClick(itemGroup, config.categoryKey, value);
+                  }}
                 />
               );
             })}
@@ -117,7 +121,9 @@ class Filters extends PureComponent {
                   color={value}
                   category={config.categoryKey}
                   isChecked={config.values[value].isChecked}
-                  onCheckboxClick={onRadioClick}
+                  onCheckboxClick={() => {
+                    onRadioClick(itemGroup, config.categoryKey, value);
+                  }}
                 />
               );
             })}
@@ -135,7 +141,9 @@ class Filters extends PureComponent {
                   size={value}
                   category={config.categoryKey}
                   isChecked={config.values[value].isChecked}
-                  onCheckboxClick={onCheckboxClick}
+                  onCheckboxClick={() => {
+                    onCheckboxClick(itemGroup, config.categoryKey, value);
+                  }}
                 />
               );
             })}
