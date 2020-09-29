@@ -27,7 +27,9 @@ class Main extends PureComponent {
             <Buttons/>
           </div>
           <div className="main__filters">
-            <Filters/>
+            <Filters
+              itemGroup={itemGroup}
+            />
           </div>
           <div className="main__catalog">
             <Catalog

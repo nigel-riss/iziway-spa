@@ -14,6 +14,9 @@ export const ITEM_GROUPS = {
 };
 
 
+export const DEFAULT_ITEM_GROUP = `footwear`;
+
+
 export const GroupToCategoryArray = {
   footwear: [
     `Ботинки`,

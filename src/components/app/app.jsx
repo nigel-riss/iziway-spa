@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import history from '../../history.js';
 import { getItemById } from '../../reducer.js';
+import { DEFAULT_ITEM_GROUP } from '../../utils/const.js';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
 import Footer from '../footer/footer.jsx';
 import ItemPopup from '../item-popup/item-popup.jsx';
-import history from '../../history.js';
 
 
 const _renderItemPopup = (id, itemGroup) => {
@@ -47,8 +48,7 @@ class App extends React.Component {
     console.log(itemGroup, itemId);
 
     if (!itemGroup) {
-      history.push(`/footwear`);
-      // return;
+      history.push(`/${DEFAULT_ITEM_GROUP}`);
     }
 
     return (

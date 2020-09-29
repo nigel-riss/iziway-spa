@@ -123,12 +123,13 @@ class Search extends Component {
 
   _handleSubmit (evt) {
     const {
+      itemGroup,
       onSearchSubmit,
     } = this.props;
 
     evt.preventDefault();
 
-    onSearchSubmit();
+    onSearchSubmit(itemGroup);
 
     this.setState({
       value: ``,
@@ -175,8 +176,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.findItems(query));
   },
 
-  onSearchSubmit () {
-    dispatch(ActionCreator.clearFilters());
+  onSearchSubmit (itemGroup) {
+    dispatch(ActionCreator.clearFilters(itemGroup));
     dispatch(ActionCreator.applyFoundItems());
   },
 

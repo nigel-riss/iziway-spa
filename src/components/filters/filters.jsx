@@ -25,9 +25,10 @@ class Filters extends PureComponent {
     const {
       className,
       filtersConfig,
-      onResetButtonClick,
       isFiltersPaneShown,
+      itemGroup,
       onCloseButtonClick,
+      onResetButtonClick,
     } = this.props;
 
     return (
@@ -154,21 +155,21 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onRadioClick (category, value) {
+  onRadioClick (itemGroup, category, value) {
     dispatch(ActionCreator.switchFilter(category, value));
-    dispatch(ActionCreator.applyFilters());
+    dispatch(ActionCreator.applyFilters(itemGroup));
     dispatch(ActionCreator.setCurrentPage(0));
   },
 
-  onCheckboxClick (category, value) {
+  onCheckboxClick (itemGroup, category, value) {
     dispatch(ActionCreator.toggleFilter(category, value));
-    dispatch(ActionCreator.applyFilters());
+    dispatch(ActionCreator.applyFilters(itemGroup));
     dispatch(ActionCreator.setCurrentPage(0));
   },
 
-  onResetButtonClick () {
-    dispatch(ActionCreator.clearFilters());
-    dispatch(ActionCreator.applyFilters());
+  onResetButtonClick (itemGroup) {
+    dispatch(ActionCreator.clearFilters(itemGroup));
+    dispatch(ActionCreator.applyFilters(itemGroup));
     dispatch(ActionCreator.setCurrentPage(0));
   },
 

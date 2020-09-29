@@ -109,10 +109,10 @@ const StyledGroupNav = styled(GroupNav)`
 
 
 const mapDispatchToProps = (dispatch) => ({
-  onGroupLinkClick (groupName) {
-    history.push(`/${groupName}`);
-    dispatch(ActionCreator.clearFilters());
-    dispatch(ActionCreator.applyFilters());
+  onGroupLinkClick (itemGroup) {
+    history.push(`/${itemGroup}`);
+    dispatch(ActionCreator.clearFilters(itemGroup));
+    dispatch(ActionCreator.applyFilters(itemGroup));
   },
 });
 

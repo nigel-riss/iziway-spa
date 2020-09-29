@@ -4,7 +4,10 @@ import {
   getValuesCount,
   getAllSizes,
 } from './utils/data.js';
-import { GroupToCategoryArray } from './utils/const.js';
+import {
+  DEFAULT_ITEM_GROUP,
+  GroupToCategoryArray,
+} from './utils/const.js';
 
 
 data.forEach((it) => {
@@ -18,7 +21,7 @@ const getItemById = (id) => data.find(it => +it.id === +id);
 // //////////////
 // Item groups //
 // //////////////
-const getItemsFromGroup = (data, groupName) => {
+const _getItemsFromGroup = (data, groupName) => {
   const categories = GroupToCategoryArray[groupName];
   return data.filter((item) => {
     return categories.some((categoryName) => {
@@ -85,54 +88,6 @@ const FILTERS_CONFIG_BOILERPLATE = {
   },
 };
 
-const _getFilteredItems = (items, filtersConfig) => {
-  let itemsToFilter = items.slice();
-  const configs = Object.entries(filtersConfig);
-
-  configs.forEach((config) => {
-    const [
-      category,
-      settings,
-    ] = config;
-
-    const filteringValues = Object
-      .entries(settings.values)
-      .filter((it) => it[1].isChecked === true);
-
-    const isFiltering = filteringValues.length > 0;
-
-    if (isFiltering) {
-      itemsToFilter = _filterItems(
-        itemsToFilter,
-        category,
-        settings.type,
-        filteringValues
-      );
-    }
-  });
-
-  return itemsToFilter;
-};
-
-
-const _filterItems = (items, category, type, filteringValues) => {
-  console.table(category, type, filteringValues);
-  items = items.filter((item) => {
-    return filteringValues.some((value) => {
-      switch (type) {
-        case FilterType.SIZE:
-          return item.sizes.split(`,`)
-            .some((it) => parseInt(it, 10) === parseInt((value[0]), 10));
-        case FilterType.SIMPLE:
-        case FilterType.COLOR:
-          return value[0] === item[category];
-      }
-    });
-  });
-
-  return items;
-};
-
 const _setFiltersValues = (items, filtersConfigBoilerplate) => {
   const filtersConfig = JSON
     .parse(JSON.stringify(filtersConfigBoilerplate));
@@ -163,6 +118,53 @@ const _setFiltersValues = (items, filtersConfigBoilerplate) => {
   }
 
   return filtersConfig;
+};
+
+const _getFilteredItems = (items, filtersConfig) => {
+  let itemsToFilter = items.slice();
+  const configs = Object.entries(filtersConfig);
+
+  configs.forEach((config) => {
+    const [
+      category,
+      settings,
+    ] = config;
+
+    const filteringValues = Object
+      .entries(settings.values)
+      .filter((it) => it[1].isChecked === true);
+
+    const isFiltering = filteringValues.length > 0;
+
+    if (isFiltering) {
+      itemsToFilter = _filterItems(
+        itemsToFilter,
+        category,
+        settings.type,
+        filteringValues
+      );
+    }
+  });
+
+  return itemsToFilter;
+};
+
+const _filterItems = (items, category, type, filteringValues) => {
+  console.table(category, type, filteringValues);
+  items = items.filter((item) => {
+    return filteringValues.some((value) => {
+      switch (type) {
+        case FilterType.SIZE:
+          return item.sizes.split(`,`)
+            .some((it) => parseInt(it, 10) === parseInt((value[0]), 10));
+        case FilterType.SIMPLE:
+        case FilterType.COLOR:
+          return value[0] === item[category];
+      }
+    });
+  });
+
+  return items;
 };
 
 const _toggleFilter = (state, { category, value }) => {
@@ -196,18 +198,17 @@ const getSearchedItems = (items, query) => {
 
 
 const initialState = {
-  items: data.slice(),
-  activeGroup: `footwear`,
-  filteredItems: data.slice(),
-  filtersConfig: _setFiltersValues(data.slice(), FILTERS_CONFIG_BOILERPLATE),
+  filteredItems: _getItemsFromGroup(data, DEFAULT_ITEM_GROUP),
+  filtersConfig: _setFiltersValues(
+    _getItemsFromGroup(data, DEFAULT_ITEM_GROUP),
+    FILTERS_CONFIG_BOILERPLATE
+  ),
   currentPage: 0,
   isFiltersPaneShown: false,
   foundItems: [],
 };
 
 const ActionType = {
-  SET_ACTIVE_GROUP: `SET_ACTIVE_GROUP`,
-  SET_ACTIVE_ITEM: `SET_ACTIVE_ITEM`,
   TOGGLE_FILTER: `TOGGLE_FILTER`,
   SWITCH_FILTER: `SWITCH_FILTER`,
   CLEAR_FILTERS: `CLEAR_FILTERS`,
@@ -220,11 +221,6 @@ const ActionType = {
 
 
 const ActionCreator = {
-  setActiveGroup: (groupName) => ({
-    type: ActionType.SET_ACTIVE_GROUP,
-    payload: groupName,
-  }),
-
   toggleFilter: (category, value) => ({
     type: ActionType.TOGGLE_FILTER,
     payload: { category, value },
@@ -235,13 +231,14 @@ const ActionCreator = {
     payload: { category, value },
   }),
 
-  clearFilters: () => ({
+  clearFilters: (itemGroup) => ({
     type: ActionType.CLEAR_FILTERS,
+    payload: itemGroup,
   }),
 
-  applyFilters: (filtersConfig) => ({
+  applyFilters: (itemGroup) => ({
     type: ActionType.APPLY_FILTERS,
-    payload: filtersConfig,
+    payload: itemGroup,
   }),
 
   setCurrentPage: (pageNumber) => ({
@@ -267,11 +264,6 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.SET_ACTIVE_GROUP:
-      return extend(state, {
-        items: getItemsFromGroup(data, action.payload),
-        activeGroup: action.payload,
-      });
     case ActionType.TOGGLE_FILTER:
       return extend(state, {
         filtersConfig: _toggleFilter(state, action.payload),
@@ -282,11 +274,17 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.CLEAR_FILTERS:
       return extend(state, {
-        filtersConfig: _setFiltersValues(state.items, FILTERS_CONFIG_BOILERPLATE),
+        filtersConfig: _setFiltersValues(
+          _getItemsFromGroup(data, action.payload),
+          FILTERS_CONFIG_BOILERPLATE
+        ),
       });
     case ActionType.APPLY_FILTERS:
       return extend(state, {
-        filteredItems: _getFilteredItems(state.items, state.filtersConfig),
+        filteredItems: _getFilteredItems(
+          _getItemsFromGroup(data, action.payload),
+          state.filtersConfig
+        ),
       });
     case ActionType.SET_CURRENT_PAGE:
       return extend(state, {
@@ -312,7 +310,7 @@ const reducer = (state = initialState, action) => {
 
 export {
   getItemById,
-  getItemsFromGroup,
+  _getItemsFromGroup,
   reducer,
   ActionType,
   ActionCreator,

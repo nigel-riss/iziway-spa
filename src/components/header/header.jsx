@@ -24,7 +24,9 @@ class Header extends React.Component {
             <img src="./assets/img/logo.svg" alt="Логотип IZIway"/>
           </div>
           <div className="header__search">
-            <Search/>
+            <Search
+              itemGroup={itemGroup}
+            />
           </div>
         </div>
         <nav className="header__nav">
