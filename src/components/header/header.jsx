@@ -28,7 +28,9 @@ class Header extends React.Component {
         </div>
         <nav className="header__nav">
           <div className="header__franchise">
-            <a href="https://iziway.ru/" className="header__franchise-link">Франшиза IZIway Shop</a>
+            <a href="https://iziway.ru/" className="header__franchise-link">
+              Франшиза IZIway Shop
+            </a>
           </div>
           <GroupNav/>
         </nav>

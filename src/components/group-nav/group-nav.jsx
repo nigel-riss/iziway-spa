@@ -6,6 +6,7 @@ import {
   Colors,
 } from '../../utils/const.js';
 import { ActionCreator } from '../../reducer.js';
+import history from '../../history.js';
 
 
 class GroupNav extends PureComponent {
@@ -30,7 +31,13 @@ class GroupNav extends PureComponent {
                 `header__nav-item--active`}`}
               key={i}
             >
-              <a href="#" onClick={() => { onGroupLinkClick(key); }}>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onGroupLinkClick(key);
+                }}
+              >
                 {value}
               </a>
             </li>
@@ -106,7 +113,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onGroupLinkClick (groupName) {
-    dispatch(ActionCreator.setActiveGroup(groupName));
+    history.push(`/${groupName}`);
+    // dispatch(ActionCreator.setActiveGroup(groupName));
     dispatch(ActionCreator.clearFilters());
     dispatch(ActionCreator.applyFilters());
   },
