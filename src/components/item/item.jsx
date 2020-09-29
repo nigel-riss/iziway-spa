@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { rgba } from 'polished';
 import { Colors } from '../../utils/const.js';
+import history from '../../history.js';
 
 
 const ItemCard = (props) => {
@@ -17,6 +18,7 @@ const ItemCard = (props) => {
     picture,
     vendor,
     sizes,
+    id,
   } = item;
 
   const mainImageURL = picture.split(`,`)[0];
@@ -25,7 +27,9 @@ const ItemCard = (props) => {
   return (
     <article
       className={className}
-      onClick={() => {
+      onClick={(e) => {
+        e.preventDefault();
+        history.push(`/${id}`);
         onCardClick(props.item);
       }}
     >

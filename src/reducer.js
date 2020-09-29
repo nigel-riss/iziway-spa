@@ -7,6 +7,12 @@ import {
 import { GroupToCategoryArray } from './utils/const.js';
 
 
+data.forEach((it) => {
+  const id = it.product_url.split(`=`)[2];
+  it.id = id;
+});
+
+
 // //////////////
 // Item groups //
 // //////////////
@@ -187,11 +193,11 @@ const getSearchedItems = (items, query) => {
 };
 
 
-const initialItems = _getItemsFromGroup(data, `FOOTWEAR`);
+const initialItems = _getItemsFromGroup(data, `footwear`);
 
 const initialState = {
   items: initialItems.slice(),
-  activeGroup: `FOOTWEAR`,
+  activeGroup: `footwear`,
   filteredItems: initialItems.slice(),
   filtersConfig: _setFiltersValues(initialItems.slice(), FILTERS_CONFIG_BOILERPLATE),
   activeItem: null,

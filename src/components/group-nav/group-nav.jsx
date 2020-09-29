@@ -114,7 +114,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGroupLinkClick (groupName) {
     history.push(`/${groupName}`);
-    // dispatch(ActionCreator.setActiveGroup(groupName));
+    dispatch(ActionCreator.setActiveGroup(groupName));
     dispatch(ActionCreator.clearFilters());
     dispatch(ActionCreator.applyFilters());
   },
