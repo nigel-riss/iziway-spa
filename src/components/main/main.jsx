@@ -14,7 +14,6 @@ class Main extends PureComponent {
     const {
       className,
       itemGroup,
-      items,
     } = this.props;
 
     return (
@@ -34,7 +33,6 @@ class Main extends PureComponent {
           <div className="main__catalog">
             <Catalog
               itemGroup={itemGroup}
-              items={items}
             />
           </div>
         </div>

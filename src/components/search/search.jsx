@@ -111,10 +111,11 @@ class Search extends Component {
 
   _handleChange (evt) {
     const {
+      itemGroup,
       onSearchInputChange,
     } = this.props;
 
-    onSearchInputChange(evt.target.value);
+    onSearchInputChange({itemGroup, query: evt.target.value});
 
     this.setState({
       value: evt.target.value,
@@ -172,8 +173,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSearchInputChange (query) {
-    dispatch(ActionCreator.findItems(query));
+  onSearchInputChange (options) {
+    dispatch(ActionCreator.findItems(options));
   },
 
   onSearchSubmit (itemGroup) {

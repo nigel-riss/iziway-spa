@@ -31,7 +31,6 @@ class App extends React.Component {
   render () {
     const {
       className,
-      items,
       isFiltersPaneShown,
     } = this.props;
 
@@ -58,7 +57,6 @@ class App extends React.Component {
         />
         <Main
           itemGroup={itemGroup}
-          items={items}
         />
         <Footer/>
 
@@ -70,7 +68,6 @@ class App extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-  items: state.items,
   isFiltersPaneShown: state.isFiltersPaneShown,
 });
 

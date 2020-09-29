@@ -188,8 +188,12 @@ const _switchFilter = (state, { category, value }) => {
 // ////////////
 // Searching //
 // ////////////
-const getSearchedItems = (items, query) => {
-  const itemsToSearch = items.slice();
+const getSearchedItems = (options) => {
+  const {
+    itemGroup,
+    query,
+  } = options;
+  const itemsToSearch = _getItemsFromGroup(data, itemGroup);
   return itemsToSearch.filter(it => {
     const compareString = `${it.brand.toLowerCase()} ${it.model.toLowerCase()}`;
     return compareString.includes(query.toLowerCase());
@@ -251,9 +255,9 @@ const ActionCreator = {
     payload: isPaneShown,
   }),
 
-  findItems: (query) => ({
+  findItems: (options) => ({
     type: ActionType.FIND_ITEMS,
-    payload: query,
+    payload: options,
   }),
 
   applyFoundItems: () => ({
@@ -296,7 +300,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.FIND_ITEMS:
       return extend(state, {
-        foundItems: getSearchedItems(state.items, action.payload),
+        foundItems: getSearchedItems(action.payload),
       });
     case ActionType.APPLY_FOUND_ITEMS:
       return extend(state, {

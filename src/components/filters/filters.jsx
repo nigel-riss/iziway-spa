@@ -26,7 +26,6 @@ class Filters extends PureComponent {
       className,
       filtersConfig,
       isFiltersPaneShown,
-      itemGroup,
       onCloseButtonClick,
       onResetButtonClick,
     } = this.props;
