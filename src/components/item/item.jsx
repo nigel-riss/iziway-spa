@@ -9,7 +9,7 @@ const ItemCard = (props) => {
   const {
     className,
     item,
-    onCardClick,
+    itemGroup,
   } = props;
 
   const {
@@ -29,8 +29,7 @@ const ItemCard = (props) => {
       className={className}
       onClick={(e) => {
         e.preventDefault();
-        history.push(`/${id}`);
-        onCardClick(props.item);
+        history.push(`/${itemGroup}/${id}`);
       }}
     >
       <div className="item__image">

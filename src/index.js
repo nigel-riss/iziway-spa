@@ -4,6 +4,12 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer } from './reducer.js';
 import App from './components/app/app.jsx';
+import {
+  Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import history from './history.js';
 
 
 const store = createStore(
@@ -13,8 +19,12 @@ const store = createStore(
 
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App/>
-  </Provider>,
+  <Router history={history}>
+    <Provider store={store}>
+      <Switch>
+        <Route path="/:itemGroup?/:itemId?" component={App} />
+      </Switch>
+    </Provider>
+  </Router>,
   document.querySelector(`#root`)
 );

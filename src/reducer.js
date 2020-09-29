@@ -12,11 +12,13 @@ data.forEach((it) => {
   it.id = id;
 });
 
+const getItemById = (id) => data.find(it => +it.id === +id);
+
 
 // //////////////
 // Item groups //
 // //////////////
-const _getItemsFromGroup = (data, groupName) => {
+const getItemsFromGroup = (data, groupName) => {
   const categories = GroupToCategoryArray[groupName];
   return data.filter((item) => {
     return categories.some((categoryName) => {
@@ -193,14 +195,11 @@ const getSearchedItems = (items, query) => {
 };
 
 
-const initialItems = _getItemsFromGroup(data, `footwear`);
-
 const initialState = {
-  items: initialItems.slice(),
+  items: data.slice(),
   activeGroup: `footwear`,
-  filteredItems: initialItems.slice(),
-  filtersConfig: _setFiltersValues(initialItems.slice(), FILTERS_CONFIG_BOILERPLATE),
-  activeItem: null,
+  filteredItems: data.slice(),
+  filtersConfig: _setFiltersValues(data.slice(), FILTERS_CONFIG_BOILERPLATE),
   currentPage: 0,
   isFiltersPaneShown: false,
   foundItems: [],
@@ -209,7 +208,6 @@ const initialState = {
 const ActionType = {
   SET_ACTIVE_GROUP: `SET_ACTIVE_GROUP`,
   SET_ACTIVE_ITEM: `SET_ACTIVE_ITEM`,
-  CLEAR_ACTIVE_ITEM: `CLEAR_ACTIVE_ITEM`,
   TOGGLE_FILTER: `TOGGLE_FILTER`,
   SWITCH_FILTER: `SWITCH_FILTER`,
   CLEAR_FILTERS: `CLEAR_FILTERS`,
@@ -225,15 +223,6 @@ const ActionCreator = {
   setActiveGroup: (groupName) => ({
     type: ActionType.SET_ACTIVE_GROUP,
     payload: groupName,
-  }),
-
-  setActiveItem: (item) => ({
-    type: ActionType.SET_ACTIVE_ITEM,
-    payload: item,
-  }),
-
-  clearActiveItem: () => ({
-    type: ActionType.CLEAR_ACTIVE_ITEM,
   }),
 
   toggleFilter: (category, value) => ({
@@ -280,16 +269,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_ACTIVE_GROUP:
       return extend(state, {
-        items: _getItemsFromGroup(data, action.payload),
+        items: getItemsFromGroup(data, action.payload),
         activeGroup: action.payload,
-      });
-    case ActionType.SET_ACTIVE_ITEM:
-      return extend(state, {
-        activeItem: action.payload,
-      });
-    case ActionType.CLEAR_ACTIVE_ITEM:
-      return extend(state, {
-        activeItem: null,
       });
     case ActionType.TOGGLE_FILTER:
       return extend(state, {
@@ -330,6 +311,8 @@ const reducer = (state = initialState, action) => {
 
 
 export {
+  getItemById,
+  getItemsFromGroup,
   reducer,
   ActionType,
   ActionCreator,

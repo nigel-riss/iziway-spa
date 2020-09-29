@@ -19,7 +19,7 @@ class Catalog extends PureComponent {
       className,
       currentPage,
       filteredItems,
-      onCardClick,
+      itemGroup,
       onPageLinkClick,
     } = this.props;
 
@@ -34,7 +34,7 @@ class Catalog extends PureComponent {
               <ItemCard
                 key={`${i} ${item.name}`}
                 item={item}
-                onCardClick={onCardClick}
+                itemGroup={itemGroup}
               />
             );
           })}
@@ -58,10 +58,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCardClick (item) {
-    dispatch(ActionCreator.setActiveItem(item));
-  },
-
   onPageLinkClick (pageNumber) {
     dispatch(ActionCreator.setCurrentPage(pageNumber));
   },

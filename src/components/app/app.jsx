@@ -1,11 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { ActionCreator } from '../../reducer.js';
+import { getItemById } from '../../reducer.js';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
 import Footer from '../footer/footer.jsx';
 import ItemPopup from '../item-popup/item-popup.jsx';
+import history from '../../history.js';
+
+
+const _renderItemPopup = (id, itemGroup) => {
+  const item = getItemById(id);
+  return (
+    item && <ItemPopup
+      item={item}
+      onPopupCloseClick={() => {
+        history.push(`/${itemGroup}`);
+      }}
+    />
+  );
+};
 
 
 class App extends React.Component {
@@ -17,27 +31,38 @@ class App extends React.Component {
     const {
       className,
       items,
-      activeItem,
       isFiltersPaneShown,
-      onPopupCloseClick,
     } = this.props;
 
-    (activeItem || isFiltersPaneShown)
+    const {
+      itemGroup,
+      itemId,
+    } = this.props.match.params;
+
+    (itemId || isFiltersPaneShown)
       ? document.body.classList.add(`overflow-hidden`)
       : document.body.classList.remove(`overflow-hidden`);
 
+    console.log(this.props.match);
+    console.log(itemGroup, itemId);
+
+    if (!itemGroup) {
+      history.push(`/footwear`);
+      // return;
+    }
+
     return (
       <div className={className}>
-        <Header/>
+        <Header
+          itemGroup={itemGroup}
+        />
         <Main
+          itemGroup={itemGroup}
           items={items}
         />
         <Footer/>
 
-        {activeItem && <ItemPopup
-          item={activeItem}
-          onPopupCloseClick={onPopupCloseClick}
-        />}
+        {_renderItemPopup(itemId, itemGroup)}
       </div>
     );
   }
@@ -46,14 +71,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
   items: state.items,
-  activeItem: state.activeItem,
   isFiltersPaneShown: state.isFiltersPaneShown,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onPopupCloseClick () {
-    dispatch(ActionCreator.clearActiveItem());
-  },
 });
 
 
@@ -68,4 +86,4 @@ const StyledApp = styled(App)`
 `;
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(StyledApp);
+export default connect(mapStateToProps, null)(StyledApp);

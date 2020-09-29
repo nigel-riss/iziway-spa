@@ -16,7 +16,7 @@ class GroupNav extends PureComponent {
 
   render () {
     const {
-      activeGroup,
+      itemGroup,
       className,
       onGroupLinkClick,
     } = this.props;
@@ -27,7 +27,7 @@ class GroupNav extends PureComponent {
           const [key, value] = it;
           return (
             <li
-              className={`header__nav-item ${activeGroup === key &&
+              className={`header__nav-item ${itemGroup === key &&
                 `header__nav-item--active`}`}
               key={i}
             >
@@ -107,17 +107,13 @@ const StyledGroupNav = styled(GroupNav)`
   }
 `;
 
-const mapStateToProps = (state) => ({
-  activeGroup: state.activeGroup,
-});
 
 const mapDispatchToProps = (dispatch) => ({
   onGroupLinkClick (groupName) {
     history.push(`/${groupName}`);
-    dispatch(ActionCreator.setActiveGroup(groupName));
     dispatch(ActionCreator.clearFilters());
     dispatch(ActionCreator.applyFilters());
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(StyledGroupNav);
+export default connect(null, mapDispatchToProps)(StyledGroupNav);

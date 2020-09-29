@@ -13,6 +13,7 @@ class Main extends PureComponent {
   render () {
     const {
       className,
+      itemGroup,
       items,
     } = this.props;
 
@@ -30,6 +31,7 @@ class Main extends PureComponent {
           </div>
           <div className="main__catalog">
             <Catalog
+              itemGroup={itemGroup}
               items={items}
             />
           </div>

@@ -14,6 +14,7 @@ class Header extends React.Component {
   render () {
     const {
       className,
+      itemGroup,
     } = this.props;
 
     return (
@@ -32,7 +33,9 @@ class Header extends React.Component {
               Франшиза IZIway Shop
             </a>
           </div>
-          <GroupNav/>
+          <GroupNav
+            itemGroup={itemGroup}
+          />
         </nav>
       </header>
     );
