@@ -1,4 +1,4 @@
-import data from './mocks/fix-biz.json';
+import data from './mocks/bizoutmax.json';
 import {
   extend,
   getValuesCount,

@@ -52,6 +52,12 @@ const ItemSpecs = (props) => {
 
 
 const StyledItemSpecs = styled(ItemSpecs)`
+  margin-bottom: 2rem;
+
+  @media (min-width: 1000px) {
+    margin-bottom: 4rem;
+  }
+
   .spec {
     margin-bottom: 0.75rem;
   }

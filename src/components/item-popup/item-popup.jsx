@@ -13,6 +13,7 @@ class ItemPopup extends Component {
   constructor (props) {
     super(props);
 
+    this._handleCopyClick = this._handleCopyClick.bind(this);
     this._handleEscKeyDown = this._handleEscKeyDown.bind(this);
   }
 
@@ -58,6 +59,14 @@ class ItemPopup extends Component {
                 <ItemSpecs
                   item={item}
                 />
+                <button
+                  className="item-popup__copy"
+                  onClick={() => {
+                    this._handleCopyClick();
+                  }}
+                >
+                  Скопировать ссылку
+                </button>
               </div>
             </div>
             <div className="item-popup__description">
@@ -76,6 +85,15 @@ class ItemPopup extends Component {
         </div>
       </section>
     );
+  }
+
+  _handleCopyClick () {
+    const textarea = document.createElement(`textarea`);
+    textarea.value = window.location.href;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand(`copy`);
+    document.body.removeChild(textarea);
   }
 
   _handleEscKeyDown (evt) {
@@ -272,6 +290,40 @@ const StyledItemPopup = styled(ItemPopup)`
       &::before {
         content: '— ';
       }
+    }
+  }
+
+  .item-popup__copy {
+    margin-left: -0.5rem;
+    padding: 0.375rem 1rem;
+
+    border: none;
+    border-radius: 0.25rem;
+
+    background-color: ${rgba(Colors.mist, 0.5)};
+    cursor: pointer;
+
+    &:hover {
+      background-color: ${Colors.turquoise};
+    }
+
+    &:active {
+      opacity: 0.5;
+      outline: none;
+    }
+
+    &::before {
+      content: '';
+
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 0.25rem;
+      height: 1.5rem;
+      width: 1.5rem;
+
+      background-image: url('/assets/img/copy.svg');
+      background-repeat: no-repeat;
+      background-position: center;
     }
   }
 `;
