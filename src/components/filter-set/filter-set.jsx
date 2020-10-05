@@ -128,6 +128,7 @@ const StyledFilterSet = styled(FilterSet)`
 
     @media (min-width: 1000px) {
       transition: all 0.125s ease-in-out;
+      overflow-x: hidden;
     }
   }
 

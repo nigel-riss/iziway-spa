@@ -17,7 +17,8 @@ const _getPagesLinks = (currentPage, pagesCount, onPageLinkClick) => {
           key={i}
           className={`pagination__link ${i === currentPage && `pagination__link--current`}`}
           href="#"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             onPageLinkClick(i);
           }}
         >
@@ -50,7 +51,8 @@ class Pagination extends PureComponent {
         <a
           className="pagination__prev"
           href="#"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             onPageLinkClick(currentPage - 1);
           }}
         >
@@ -77,7 +79,8 @@ class Pagination extends PureComponent {
         <a
           className="pagination__next"
           href="#"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             onPageLinkClick(currentPage + 1);
           }}
         >

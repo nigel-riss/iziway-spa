@@ -10,9 +10,16 @@ import {
 } from './utils/const.js';
 
 
+// Adding custom properties
 data.forEach((it) => {
   const id = it.product_url.split(`=`)[2];
   it.id = id;
+
+  const nameStart = it.name.split(` `)[0];
+  if (~GroupToCategoryArray.footwear.indexOf(nameStart)) {
+    return;
+  }
+  it.itemType = nameStart;
 });
 
 const getItemById = (id) => data.find(it => +it.id === +id);
@@ -54,6 +61,12 @@ const FILTERS_CONFIG_BOILERPLATE = {
     categoryKey: `sizes`,
     values: [],
     extraBodyClass: `filter__body--fx`,
+  },
+  itemType: {
+    name: `Модель`,
+    type: FilterType.SIMPLE,
+    categoryKey: `itemType`,
+    values: [],
   },
   // price: {
   //   name: `Цена`,
