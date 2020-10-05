@@ -11,7 +11,7 @@ const Footer = (props) => {
         <img src="/assets/img/footer-logo.svg" alt="Логотип IZIway"/>
       </div>
       <p className="footer__copy">
-          IZIway Shop &copy; 2019 — {new Date().getFullYear()}&nbsp;&nbsp;<small>🤍</small>
+          IZIway Shop &copy; 2019 — {new Date().getFullYear()}
       </p>
     </footer>
   );
