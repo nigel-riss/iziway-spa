@@ -1,10 +1,10 @@
 RewriteEngine On
 RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule (.*) /index.html [QSA,L]
+RewriteCond %{HTTP:X-HTTPS} 1 [NC]
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1 [R=301,L]
 
 RewriteEngine On
 RewriteBase /
-RewriteCond %{HTTP:X-HTTPS} 1 [NC]
-RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1 [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.*) / [QSA,L]
