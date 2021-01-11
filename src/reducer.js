@@ -1,4 +1,3 @@
-import data from './mocks/bizoutmax.json';
 import {
   extend,
   getValuesCount,
@@ -9,18 +8,6 @@ import {
   GroupToCategoryArray,
 } from './utils/const.js';
 
-
-// Adding custom properties
-data.forEach((it) => {
-  const id = it.product_url.split(`=`)[2];
-  it.id = id;
-
-  const nameStart = it.name.split(` `)[0];
-  if (~GroupToCategoryArray.footwear.indexOf(nameStart)) {
-    return;
-  }
-  it.itemType = nameStart;
-});
 
 const getItemById = (id) => data.find(it => +it.id === +id);
 
@@ -200,12 +187,12 @@ const _switchFilter = (state, { category, value }) => {
 // ////////////
 // Searching //
 // ////////////
-const getSearchedItems = (options) => {
+const getSearchedItems = (items, options) => {
   const {
     itemGroup,
     query,
   } = options;
-  const itemsToSearch = _getItemsFromGroup(data, itemGroup);
+  const itemsToSearch = _getItemsFromGroup(items, itemGroup);
   return itemsToSearch.filter(it => {
     const compareString = `${it.brand.toLowerCase()} ${it.model.toLowerCase()}`;
     return compareString.includes(query.toLowerCase());
@@ -214,11 +201,10 @@ const getSearchedItems = (options) => {
 
 
 const initialState = {
-  filteredItems: _getItemsFromGroup(data, DEFAULT_ITEM_GROUP),
-  filtersConfig: _setFiltersValues(
-    _getItemsFromGroup(data, DEFAULT_ITEM_GROUP),
-    FILTERS_CONFIG_BOILERPLATE
-  ),
+  // filteredItems: _getItemsFromGroup(data, DEFAULT_ITEM_GROUP),
+  items: [],
+  filteredItems: [],
+  filtersConfig: null,
   currentPage: 0,
   isFiltersPaneShown: false,
   foundItems: [],
@@ -226,6 +212,7 @@ const initialState = {
 
 
 const ActionType = {
+  SET_ITEMS: `SET_ITEMS`,
   TOGGLE_FILTER: `TOGGLE_FILTER`,
   SWITCH_FILTER: `SWITCH_FILTER`,
   CLEAR_FILTERS: `CLEAR_FILTERS`,
@@ -238,6 +225,11 @@ const ActionType = {
 
 
 const ActionCreator = {
+  setItems: (items) => ({
+    type: ActionType.SET_ITEMS,
+    payload: items,
+  }),
+
   toggleFilter: (category, value) => ({
     type: ActionType.TOGGLE_FILTER,
     payload: { category, value },
@@ -281,6 +273,10 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.SET_ITEMS:
+      return extend(state, {
+        items: action.payload,
+      });
     case ActionType.TOGGLE_FILTER:
       return extend(state, {
         filtersConfig: _toggleFilter(state, action.payload),
@@ -292,14 +288,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.CLEAR_FILTERS:
       return extend(state, {
         filtersConfig: _setFiltersValues(
-          _getItemsFromGroup(data, action.payload),
+          _getItemsFromGroup(state.items, action.payload),
           FILTERS_CONFIG_BOILERPLATE
         ),
       });
     case ActionType.APPLY_FILTERS:
       return extend(state, {
         filteredItems: _getFilteredItems(
-          _getItemsFromGroup(data, action.payload),
+          _getItemsFromGroup(state.items, action.payload),
           state.filtersConfig
         ),
       });
@@ -313,7 +309,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.FIND_ITEMS:
       return extend(state, {
-        foundItems: getSearchedItems(action.payload),
+        foundItems: getSearchedItems(state.items, action.payload),
       });
     case ActionType.APPLY_FOUND_ITEMS:
       return extend(state, {

@@ -29,6 +29,12 @@ const _renderItemPopup = (id, itemGroup) => {
 
 
 const App = (props) => {
+  const {
+    className,
+  } = props;
+
+  const itemGroup = ``;
+
   return (
     <div className={className}>
       <Header
@@ -39,7 +45,7 @@ const App = (props) => {
       />
       <Footer/>
 
-      {_renderItemPopup(itemId, itemGroup)}
+      {/* {_renderItemPopup(itemId, itemGroup)} */}
     </div>
   );
 }
