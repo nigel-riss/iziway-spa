@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import {
+  applyMiddleware,
+  createStore,
+} from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { reducer } from './reducer.js';
+import { createApi } from './api.js';
+import { fetchData } from './api-actions.js';
 import App from './components/app/app.jsx';
 import {
   Router,
@@ -12,19 +19,25 @@ import {
 import history from './history.js';
 
 
+const api = createApi();
+
+
 const store = createStore(
   reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+  composeWithDevTools(
+    applyMiddleware(thunk.withExtraArgument(api))
+  )
 );
 
 
-ReactDOM.render(
-  <Router history={history}>
-    <Provider store={store}>
-      <Switch>
-        <Route path="/:itemGroup?/:itemId?" component={App} />
-      </Switch>
-    </Provider>
-  </Router>,
-  document.querySelector(`#root`)
-);
+Promise.all([
+  store.dispatch(fetchData()),
+])
+  .then(() => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <App/>
+      </Provider>,
+      document.querySelector(`#root`)
+    );
+  });
