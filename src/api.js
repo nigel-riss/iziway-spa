@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 
-// const BASE_URL = `http://catalog.iziway.ru/`;
-const BASE_URL = `http://localhost:31337`;
+const BASE_URL = `http://catalog.iziway.ru/`;
+// const BASE_URL = `http://localhost:31337`;
 const REQUEST_TIMEOUT = 0;
 
 
