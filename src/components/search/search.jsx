@@ -5,6 +5,8 @@ import { Colors } from '../../utils/const.js';
 import { connect } from 'react-redux';
 import { ActionCreator } from '../../reducer.js';
 import SearchResult from '../search-result/search-result.jsx';
+import history from '../../history.js';
+
 
 const ESC_KEY_CODE = 27;
 const ENTER_KEY_CODE = 13;
@@ -32,7 +34,7 @@ class Search extends Component {
     const {
       className,
       foundItems,
-      onSearchResultClick,
+      itemGroup,
     } = this.props;
 
     const {
@@ -91,7 +93,7 @@ class Search extends Component {
                 image={it.picture.split(`,`)[0]}
                 title={`${it.brand} ${it.model}`}
                 onSearchResultClick={() => {
-                  onSearchResultClick(it);
+                  history.push(`/${itemGroup}/${it.id}`);
                 }}
               />
             );
@@ -115,7 +117,7 @@ class Search extends Component {
       onSearchInputChange,
     } = this.props;
 
-    onSearchInputChange({itemGroup, query: evt.target.value});
+    onSearchInputChange({ itemGroup, query: evt.target.value });
 
     this.setState({
       value: evt.target.value,
@@ -180,10 +182,6 @@ const mapDispatchToProps = (dispatch) => ({
   onSearchSubmit (itemGroup) {
     dispatch(ActionCreator.clearFilters(itemGroup));
     dispatch(ActionCreator.applyFoundItems());
-  },
-
-  onSearchResultClick (item) {
-    dispatch(ActionCreator.setActiveItem(item));
   },
 });
 

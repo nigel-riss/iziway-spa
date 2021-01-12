@@ -18,9 +18,6 @@ class Main extends PureComponent {
 
     return (
       <main className={className}>
-        {/* <div className="__title">
-          <h1 className="category-title">Мужские кроссовки</h1>
-        </div> */}
         <div className="main__body">
           <div className="main__buttons">
             <Buttons/>
