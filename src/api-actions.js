@@ -1,5 +1,8 @@
 import { ActionCreator } from './reducer.js';
-import { GroupToCategoryArray } from './utils/const.js';
+import {
+  DEFAULT_ITEM_GROUP,
+  GroupToCategoryArray,
+} from './utils/const.js';
 
 
 const fetchData = () => (dispatch, _getState, api) => {
@@ -18,8 +21,8 @@ const fetchData = () => (dispatch, _getState, api) => {
       console.log(data);
 
       dispatch(ActionCreator.setItems(data));
-      dispatch(ActionCreator.clearFilters(`footwear`));
-      dispatch(ActionCreator.applyFilters(`footwear`));
+      dispatch(ActionCreator.clearFilters(DEFAULT_ITEM_GROUP));
+      dispatch(ActionCreator.applyFilters(DEFAULT_ITEM_GROUP));
     })
     .catch((err) => {
       console.log(`Error while loading data: ${err}`);

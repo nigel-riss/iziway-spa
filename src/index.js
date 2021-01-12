@@ -11,12 +11,6 @@ import { reducer } from './reducer.js';
 import { createApi } from './api.js';
 import { fetchData } from './api-actions.js';
 import App from './components/app/app.jsx';
-import {
-  Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
-import history from './history.js';
 
 
 const api = createApi();

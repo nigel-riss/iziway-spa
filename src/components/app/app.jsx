@@ -1,20 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import history from '../../history.js';
-import {
-  ActionCreator,
-  getItemById,
-} from '../../reducer.js';
+import { getItemById } from '../../reducer.js';
 import { DEFAULT_ITEM_GROUP } from '../../utils/const.js';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
 import Footer from '../footer/footer.jsx';
 import ItemPopup from '../item-popup/item-popup.jsx';
+import {
+  Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import history from '../../history.js';
 
 
-const _renderItemPopup = (id, itemGroup) => {
-  const item = getItemById(id);
+const _renderItemPopup = (item, itemGroup) => {
   return (
     item && <ItemPopup
       item={item}
@@ -25,90 +26,85 @@ const _renderItemPopup = (id, itemGroup) => {
   );
 };
 
-{/* <Route path="/:itemGroup?/:itemId?" component={App} /> */}
-
 
 const App = (props) => {
   const {
     className,
+    getCurrentItem,
+    isFiltersPaneShown,
   } = props;
 
-  const itemGroup = ``;
+  isFiltersPaneShown
+    ? document.body.classList.add(`overflow-hidden`)
+    : document.body.classList.remove(`overflow-hidden`);
 
   return (
-    <div className={className}>
-      <Header
-        itemGroup={itemGroup}
-      />
-      <Main
-        itemGroup={itemGroup}
-      />
-      <Footer/>
+    <Router history={history}>
+      <Switch>
+        <Route
+          exact
+          path={`/`}
+          render={() => {
+            history.push(`/${DEFAULT_ITEM_GROUP}`);
+          }}
+        />
 
-      {/* {_renderItemPopup(itemId, itemGroup)} */}
-    </div>
+        <Route
+          exact
+          path={`/:itemGroup`}
+          render={({ match }) => {
+            const { itemGroup } = match.params;
+            return (
+              <div className={className}>
+                <Header
+                  itemGroup={itemGroup}
+                />
+                <Main
+                  itemGroup={itemGroup}
+                />
+                <Footer/>
+              </div>
+            );
+          }}
+        />
+
+        <Route
+          exact
+          path={`/:itemGroup/:itemId`}
+          render={({ match }) => {
+            document.body.classList.add(`overflow-hidden`);
+
+            const {
+              itemGroup,
+              itemId,
+            } = match.params;
+            const currentItem = getCurrentItem(itemId);
+
+            return (
+              <div className={className}>
+                <Header
+                  itemGroup={itemGroup}
+                />
+                <Main
+                  itemGroup={itemGroup}
+                />
+                <Footer/>
+
+                {_renderItemPopup(currentItem, itemGroup)}
+              </div>
+            );
+          }}
+        />
+      </Switch>
+    </Router>
   );
-}
-
-// class App extends React.Component {
-//   constructor (props) {
-//     super(props);
-//   }
-
-//   componentDidMount () {
-//     const { onComponentReady } = this.props;
-//     const { itemGroup } = this.props.match.params;
-//     if (itemGroup) {
-//       onComponentReady(itemGroup);
-//     }
-//   }
-
-//   render () {
-//     const {
-//       className,
-//       isFiltersPaneShown,
-//     } = this.props;
-
-//     const {
-//       itemGroup,
-//       itemId,
-//     } = this.props.match.params;
-
-//     (itemId || isFiltersPaneShown)
-//       ? document.body.classList.add(`overflow-hidden`)
-//       : document.body.classList.remove(`overflow-hidden`);
-
-//     if (!itemGroup) {
-//       history.push(`/${DEFAULT_ITEM_GROUP}`);
-//     }
-
-//     return (
-//       <div className={className}>
-//         <Header
-//           itemGroup={itemGroup}
-//         />
-//         <Main
-//           itemGroup={itemGroup}
-//         />
-//         <Footer/>
-
-//         {_renderItemPopup(itemId, itemGroup)}
-//       </div>
-//     );
-//   }
-// }
+};
 
 
-// const mapStateToProps = (state) => ({
-//   isFiltersPaneShown: state.isFiltersPaneShown,
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   onComponentReady (itemGroup) {
-//     dispatch(ActionCreator.clearFilters(itemGroup));
-//     dispatch(ActionCreator.applyFilters(itemGroup));
-//   },
-// });
+const mapStateToProps = (state) => ({
+  getCurrentItem: getItemById(state),
+  isFiltersPaneShown: state.isFiltersPaneShown,
+});
 
 
 const StyledApp = styled(App)`
@@ -122,5 +118,4 @@ const StyledApp = styled(App)`
 `;
 
 
-// export default connect(mapStateToProps, mapDispatchToProps)(StyledApp);
-export default StyledApp;
+export default connect(mapStateToProps, null)(StyledApp);

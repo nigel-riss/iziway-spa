@@ -3,13 +3,10 @@ import {
   getValuesCount,
   getAllSizes,
 } from './utils/data.js';
-import {
-  DEFAULT_ITEM_GROUP,
-  GroupToCategoryArray,
-} from './utils/const.js';
+import { GroupToCategoryArray } from './utils/const.js';
 
 
-const getItemById = (id) => data.find(it => +it.id === +id);
+const getItemById = (state) => (id) => state.items.find(it => +it.id === +id);
 
 
 // //////////////
@@ -201,7 +198,6 @@ const getSearchedItems = (items, options) => {
 
 
 const initialState = {
-  // filteredItems: _getItemsFromGroup(data, DEFAULT_ITEM_GROUP),
   items: [],
   filteredItems: [],
   filtersConfig: null,
@@ -323,7 +319,6 @@ const reducer = (state = initialState, action) => {
 
 export {
   getItemById,
-  _getItemsFromGroup,
   reducer,
   ActionType,
   ActionCreator,
