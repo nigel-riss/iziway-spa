@@ -202,6 +202,7 @@ const initialState = {
   filteredItems: [],
   filtersConfig: null,
   currentPage: 0,
+  currentItemGroup: null,
   isFiltersPaneShown: false,
   foundItems: [],
 };
@@ -209,6 +210,7 @@ const initialState = {
 
 const ActionType = {
   SET_ITEMS: `SET_ITEMS`,
+  SET_ITEM_GROUP: `SET_ITEM_GROUP`,
   TOGGLE_FILTER: `TOGGLE_FILTER`,
   SWITCH_FILTER: `SWITCH_FILTER`,
   CLEAR_FILTERS: `CLEAR_FILTERS`,
@@ -224,6 +226,11 @@ const ActionCreator = {
   setItems: (items) => ({
     type: ActionType.SET_ITEMS,
     payload: items,
+  }),
+
+  setItemGroup: (itemGroup) => ({
+    type: ActionType.SET_ITEM_GROUP,
+    payload: itemGroup,
   }),
 
   toggleFilter: (category, value) => ({
@@ -272,6 +279,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_ITEMS:
       return extend(state, {
         items: action.payload,
+      });
+    case ActionType.SET_ITEM_GROUP:
+      return extend(state, {
+        currentItemGroup: action.payload,
       });
     case ActionType.TOGGLE_FILTER:
       return extend(state, {

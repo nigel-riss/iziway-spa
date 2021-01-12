@@ -1,7 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { connect } from 'react-redux';
-import { getItemById } from '../../reducer.js';
+import {
+  ActionCreator,
+  getItemById,
+} from '../../reducer.js';
 import { DEFAULT_ITEM_GROUP } from '../../utils/const.js';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
@@ -30,8 +33,10 @@ const _renderItemPopup = (item, itemGroup) => {
 const App = (props) => {
   const {
     className,
+    currentItemGroup,
     getCurrentItem,
     isFiltersPaneShown,
+    updateItemGroup,
   } = props;
 
   isFiltersPaneShown
@@ -54,17 +59,23 @@ const App = (props) => {
           path={`/:itemGroup`}
           render={({ match }) => {
             const { itemGroup } = match.params;
-            return (
-              <div className={className}>
-                <Header
-                  itemGroup={itemGroup}
-                />
-                <Main
-                  itemGroup={itemGroup}
-                />
-                <Footer/>
-              </div>
-            );
+
+            if (currentItemGroup !== itemGroup) {
+              updateItemGroup(itemGroup);
+              return null;
+            } else {
+              return (
+                <div className={className}>
+                  <Header
+                    itemGroup={itemGroup}
+                  />
+                  <Main
+                    itemGroup={itemGroup}
+                  />
+                  <Footer/>
+                </div>
+              );
+            }
           }}
         />
 
@@ -80,19 +91,24 @@ const App = (props) => {
             } = match.params;
             const currentItem = getCurrentItem(itemId);
 
-            return (
-              <div className={className}>
-                <Header
-                  itemGroup={itemGroup}
-                />
-                <Main
-                  itemGroup={itemGroup}
-                />
-                <Footer/>
+            if (currentItemGroup !== itemGroup) {
+              updateItemGroup(itemGroup);
+              return null;
+            } else {
+              return (
+                <div className={className}>
+                  <Header
+                    itemGroup={itemGroup}
+                  />
+                  <Main
+                    itemGroup={itemGroup}
+                  />
+                  <Footer/>
 
-                {_renderItemPopup(currentItem, itemGroup)}
-              </div>
-            );
+                  {_renderItemPopup(currentItem, itemGroup)}
+                </div>
+              );
+            }
           }}
         />
       </Switch>
@@ -102,10 +118,17 @@ const App = (props) => {
 
 
 const mapStateToProps = (state) => ({
+  currentItemGroup: state.currentItemGroup,
   getCurrentItem: getItemById(state),
   isFiltersPaneShown: state.isFiltersPaneShown,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  updateItemGroup (itemGroup) {
+    dispatch(ActionCreator.setItemGroup(itemGroup));
+    dispatch(ActionCreator.applyFilters(itemGroup));
+  },
+});
 
 const StyledApp = styled(App)`
   background-image: url('/assets/img/app-bg.svg');
@@ -118,4 +141,4 @@ const StyledApp = styled(App)`
 `;
 
 
-export default connect(mapStateToProps, null)(StyledApp);
+export default connect(mapStateToProps, mapDispatchToProps)(StyledApp);
