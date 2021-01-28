@@ -50,6 +50,7 @@ const App = (props) => {
           exact
           path={`/`}
           render={() => {
+            document.body.classList.remove(`overflow-hidden`);
             history.push(`/${DEFAULT_ITEM_GROUP}`);
           }}
         />
@@ -59,6 +60,8 @@ const App = (props) => {
           path={`/:itemGroup`}
           render={({ match }) => {
             const { itemGroup } = match.params;
+
+            document.body.classList.remove(`overflow-hidden`);
 
             if (currentItemGroup !== itemGroup) {
               updateItemGroup(itemGroup);
