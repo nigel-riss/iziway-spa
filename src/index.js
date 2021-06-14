@@ -25,20 +25,20 @@ const store = createStore(
 );
 
 
-ReactDOM.render(
-  <Maintenance/>,
-  document.querySelector(`#root`)
-);
+// ReactDOM.render(
+//   <Maintenance/>,
+//   document.querySelector(`#root`)
+// );
 
 
-// Promise.all([
-//   store.dispatch(fetchData()),
-// ])
-//   .then(() => {
-//     ReactDOM.render(
-//       <Provider store={store}>
-//         <App/>
-//       </Provider>,
-//       document.querySelector(`#root`)
-//     );
-//   });
+Promise.all([
+  store.dispatch(fetchData()),
+])
+  .then(() => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <App/>
+      </Provider>,
+      document.querySelector(`#root`)
+    );
+  });

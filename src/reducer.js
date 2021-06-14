@@ -7,6 +7,9 @@ import { GroupToCategoryArray } from './utils/const.js';
 
 
 const getItemById = (state) => (id) => state.items.find(it => +it.id === +id);
+const searchBans = [
+  `Nike`,
+];
 
 
 // //////////////
@@ -63,6 +66,9 @@ const FILTERS_CONFIG_BOILERPLATE = {
     type: FilterType.SIMPLE,
     categoryKey: `brand`,
     values: [],
+    bans: [
+      `Nike`,
+    ],
   },
   color: {
     name: `Цвет`,
@@ -96,6 +102,12 @@ const _setFiltersValues = (items, filtersConfigBoilerplate) => {
       case FilterType.SIMPLE:
       case FilterType.COLOR:
         config.values = getValuesCount(items, config.categoryKey);
+
+        // Удаляем фильтры из банов
+        config?.bans?.forEach((ban) => {
+          delete config.values[ban];
+        });
+
         for (const key in config.values) {
           config.values[key].isChecked = false;
         }
@@ -127,6 +139,7 @@ const _getFilteredItems = (items, filtersConfig) => {
       settings,
     ] = config;
 
+    // Filtering items accorgint to filters
     const filteringValues = Object
       .entries(settings.values)
       .filter((it) => it[1].isChecked === true);
@@ -140,6 +153,16 @@ const _getFilteredItems = (items, filtersConfig) => {
         settings.type,
         filteringValues
       );
+    }
+
+    // Filtering banned items
+    const bans = config[1].bans;
+    if (bans && bans.length > 0) {
+      itemsToFilter = itemsToFilter.filter((it) => {
+        return !bans.some((value) => {
+          return it[category].toLowerCase() === value.toLowerCase();
+        });
+      });
     }
   });
 
@@ -184,16 +207,22 @@ const _switchFilter = (state, { category, value }) => {
 // ////////////
 // Searching //
 // ////////////
-const getSearchedItems = (items, options) => {
+const getSearchedItems = (items, options, bans) => {
   const {
     itemGroup,
     query,
   } = options;
-  const itemsToSearch = _getItemsFromGroup(items, itemGroup);
-  return itemsToSearch.filter(it => {
+  let itemsToSearch = _getItemsFromGroup(items, itemGroup);
+  itemsToSearch = itemsToSearch.filter(it => {
     const compareString = `${it.brand.toLowerCase()} ${it.model.toLowerCase()}`;
-    return compareString.includes(query.toLowerCase());
+    const canShow = !bans.some(ban => {
+      return compareString.includes(ban.toLowerCase());
+    });
+
+    return compareString.includes(query.toLowerCase()) && canShow;
   });
+
+  return itemsToSearch;
 };
 
 
@@ -316,7 +345,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.FIND_ITEMS:
       return extend(state, {
-        foundItems: getSearchedItems(state.items, action.payload),
+        foundItems: getSearchedItems(state.items, action.payload, searchBans),
       });
     case ActionType.APPLY_FOUND_ITEMS:
       return extend(state, {
