@@ -14,11 +14,16 @@ const ItemSpecs = (props) => {
     color,
     model,
     season,
+    vendor,
   } = item;
 
   return (
     <div className={className}>
       <div className="item-popup__main-specs">
+        {vendor && <div className="spec">
+          <h3 className="spec__title">Артикул:</h3>
+          <span className="spec__value">{vendor}</span>
+        </div>}
         {color && <div className="spec">
           <h3 className="spec__title">Цвет:</h3>
           <span className="spec__value">{color}</span>
