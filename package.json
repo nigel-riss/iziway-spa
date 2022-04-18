@@ -1,6 +1,6 @@
 {
   "name": "iziway-spa",
-  "version": "1.0.0",
+  "version": "1.0.15",
   "description": "Catalog for IZIway franchise",
   "main": "./src/index.js",
   "scripts": {

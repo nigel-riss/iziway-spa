@@ -10,6 +10,7 @@ const ItemSpecs = (props) => {
   } = props;
 
   const {
+    id,
     category,
     color,
     model,
@@ -22,7 +23,7 @@ const ItemSpecs = (props) => {
       <div className="item-popup__main-specs">
         {vendor && <div className="spec">
           <h3 className="spec__title">Артикул:</h3>
-          <span className="spec__value">{vendor}</span>
+          <span className="spec__value">{id}</span>
         </div>}
         {color && <div className="spec">
           <h3 className="spec__title">Цвет:</h3>

@@ -18,7 +18,11 @@ const fetchData = () => (dispatch, _getState, api) => {
         }
         it.itemType = nameStart;
       });
-      console.log(data);
+      // console.log(data);
+
+      data.sort((a, b) => {
+        return +a.id < +b.id;
+      });
 
       dispatch(ActionCreator.setItems(data));
       dispatch(ActionCreator.clearFilters(DEFAULT_ITEM_GROUP));
