@@ -8,7 +8,7 @@ import { GroupToCategoryArray } from './utils/const.js';
 
 const getItemById = (state) => (id) => state.items.find(it => +it.id === +id);
 const searchBans = [
-  `Nike`,
+  // `Nike`,
 ];
 
 
